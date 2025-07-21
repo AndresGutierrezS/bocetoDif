@@ -1,0 +1,234 @@
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--gris-claro);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-container {
+            background-color: var(--blanco);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-top: 20px;
+        }
+        
+        .form-header {
+            border-bottom: 2px solid var(--gris-medio);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .form-header h2 {
+            color: var(--azul-oscuro);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--azul-oscuro);
+            color: var(--blanco);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--azul-medio);
+        }
+        
+        .btn-secondary {
+            background-color: var(--gris-medio);
+            color: var(--azul-oscuro);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            border: 1px solid var(--gris-medio);
+            border-radius: 6px;
+            padding: 20px;
+        }
+        
+        .section-header {
+            background-color: var(--gris-medio);
+            margin: -20px -20px 20px -20px;
+            padding: 15px 20px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title {
+            color: var(--azul-oscuro);
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--azul-oscuro);
+        }
+        
+        .form-group label.required:after {
+            content: " *";
+            color: var(--rojo);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gris-medio);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--azul-medio);
+            box-shadow: 0 0 0 2px rgba(26, 54, 93, 0.2);
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 1em;
+        }
+        
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-info {
+            background-color: #ebf8ff;
+            color: #3182ce;
+        }
+        
+        .alert-info {
+            background-color: #ebf8ff;
+            color: #3182ce;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3182ce;
+        }
+        
+        .sub-section {
+            margin-top: 20px;
+            padding-left: 15px;
+            border-left: 3px solid var(--gris-medio);
+        }
+        
+        .sub-section-title {
+            font-weight: 600;
+            color: var(--azul-oscuro);
+            margin-bottom: 10px;
+        }
+        
+        .dynamic-list {
+            margin-top: 10px;
+        }
+        
+        /* Añade esto a tu CSS existente */
+        .list-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: flex-start; /* Cambiado de center a flex-start para mejor alineación */
+            flex-wrap: wrap;
+        }
+
+        .list-item .form-group {
+            min-width: 150px; /* Ancho mínimo para cada campo */
+            flex: 1 1 150px; /* Permite que los campos crezcan pero con un mínimo */
+        }
+
+        .remove-item {
+            align-self: center; /* Centra el botón de eliminar verticalmente */
+            margin-left: auto; /* Empuja el botón a la derecha */
+            padding: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            .list-item .form-group {
+                flex: 1 1 100%; /* En móviles, cada campo ocupa toda la línea */
+            }
+            
+            .remove-item {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+        
+        .add-item {
+            color: var(--verde);
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+        }

@@ -1,0 +1,86 @@
+/* Reset de algunos márgenes y estilos predeterminados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo del cuerpo de la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+img {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 150px;
+    height: auto;
+}
+
+
+/* Estilos del formulario */
+h2 {
+    color: #333;
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+/* Estilo del formulario */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+p {
+   color: #333;
+    font-size: 1.1  rem;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+/* Campos de texto */
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* Botón de inicio de sesión */
+button {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #4c78af;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; /* O cambia por 250px si no quieres que sea tan ancho */
+}
+
+button:hover {
+    background-color: #4569a0;
+}
+
+
