@@ -131,19 +131,26 @@ class FormularioController extends Controller
             $fechas = (array) $request->medida_fecha;
             $estados = (array) $request->medida_estado;
             // dd($tipos);
-            $tipo_atencion_id = 3;
+            $plan_restitucion = '';
             if ( $request->juridico === 'Si' ) {
-                $tipo_atencion_id = 1;
+                $plan_restitucion .= 'seguimiento juridico\n';
             } elseif ( $request->psicologico === 'Si' ) {
-                $tipo_atencion_id = 2;
+                $plan_restitucion .= 'seguimiento psicologico\n';
+            } elseif ( $request->social === 'Si' ) {
+                $plan_restitucion .= 'seguimiento social\n';
             }
+            
 
             foreach ($tipos as $index => $tipo) {
-                $menor->seguimientos()->create([
-                'tipo_atencion_id' => $tipo_atencion_id,
-                'detalles' => $tipos[$index] ?? '',
-                'fecha' => $fechas[$index] ?? '',
-                'estadp' => $estados[$index] ?? '',
+                $menor->medidasProteccion()->create([
+                // 'tipo_atencion_id' => $tipo_atencion_id,
+                // 'detalles' => $tipos[$index] ?? '',
+                // 'fecha' => $fechas[$index] ?? '',
+                // 'estadp' => $estados[$index] ?? '',
+                    'detalles_medida' => $estados[$index],
+                    'tipo_medida' => $tipos[$index],
+                    'plan_restitucion' => $plan_restitucion,
+                    'fecha' => $fechas[$index],
                 ]);
             }
         }

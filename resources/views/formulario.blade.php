@@ -492,7 +492,7 @@
                 
                 <div class="form-group" style="flex: 1;">
                     <label for="medidaEstado${count}">Estado</label>
-                    <select id="medidaEstado${count}" name="medida_estado" class="form-control">
+                    <select id="medidaEstado${count}" name="medida_estado[]" class="form-control">
                         <option value="">Seleccionar...</option>
                         <option value="Vigente">Vigente</option>
                         <option value="Concluida">Concluida</option>

@@ -50,4 +50,9 @@ class Menor extends Model
         return $this->hasMany(Seguimiento::class, 'menor_id', 'id_menor');
     }
 
+    public function medidasProteccion()
+    {
+        return $this->hasMany(MedidasProteccion::class, 'menor_id');
+    }
+
 }

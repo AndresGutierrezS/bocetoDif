@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('menor_id')->constrained('menores', 'id_menor');
             $table->text('detalles_medida');
             $table->string('tipo_medida');
-            $table->integer('plan_restitucion');
+            $table->text('plan_restitucion');
             $table->date('fecha');
             $table->timestamps();
         });
