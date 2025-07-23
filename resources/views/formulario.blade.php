@@ -287,7 +287,7 @@
                             <div class="list-item">
                                 <div class="form-group" style="flex: 1;">
                                     <label for="medidaTipo1">Tipo de Medida</label>
-                                    <select id="medidaTipo1" class="form-control">
+                                    <select id="medidaTipo1" name="medida_tipo[]" class="form-control">
                                         <option value="">Seleccionar...</option>
                                         <option value="Custodia">Custodia</option>
                                         <option value="Tutela">Tutela</option>
@@ -297,12 +297,12 @@
                                 
                                 <div class="form-group" style="flex: 1;">
                                     <label for="medidaFecha1">Fecha de Inicio</label>
-                                    <input type="date" id="medidaFecha1" class="form-control">
+                                    <input type="date" id="medidaFecha1" name="medida_fecha[]" class="form-control">
                                 </div>
                                 
                                 <div class="form-group" style="flex: 1;">
                                     <label for="medidaEstado1">Estado</label>
-                                    <select id="medidaEstado1" class="form-control">
+                                    <select id="medidaEstado1" name="medida_estado[]" class="form-control">
                                         <option value="">Seleccionar...</option>
                                         <option value="Vigente">Vigente</option>
                                         <option value="Concluida">Concluida</option>
@@ -477,7 +477,7 @@
             newItem.innerHTML = `
                 <div class="form-group" style="flex: 1;">
                     <label for="medidaTipo${count}">Tipo de Medida</label>
-                    <select id="medidaTipo${count}" class="form-control">
+                    <select id="medidaTipo${count}" name="medida_tipo[]" class="form-control">
                         <option value="">Seleccionar...</option>
                         <option value="Custodia">Custodia</option>
                         <option value="Tutela">Tutela</option>
@@ -487,12 +487,12 @@
                 
                 <div class="form-group" style="flex: 1;">
                     <label for="medidaFecha${count}">Fecha de Inicio</label>
-                    <input type="date" id="medidaFecha${count}" class="form-control">
+                    <input type="date" id="medidaFecha${count}" name="medida_fecha[]" class="form-control">
                 </div>
                 
                 <div class="form-group" style="flex: 1;">
                     <label for="medidaEstado${count}">Estado</label>
-                    <select id="medidaEstado${count}" class="form-control">
+                    <select id="medidaEstado${count}" name="medida_estado" class="form-control">
                         <option value="">Seleccionar...</option>
                         <option value="Vigente">Vigente</option>
                         <option value="Concluida">Concluida</option>

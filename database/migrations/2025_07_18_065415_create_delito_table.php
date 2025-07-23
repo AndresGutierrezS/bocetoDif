@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('delito', function (Blueprint $table) {
             $table->id('id_delito');
-            $table->foreignId('menor_id')->constrained('menor', 'id_menor');
+            $table->foreignId('menor_id')->constrained('menores', 'id_menor');
             $table->text('detalles_delito');
             $table->text('lugar_hechos');
             $table->foreignId('agencia_id')->constrained('agencia', 'id_agencia');

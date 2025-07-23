@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ExpedienteJudicial;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Seguimiento;
 use Illuminate\Support\Facades\Date;
 
 class FormularioController extends Controller
@@ -109,23 +110,45 @@ class FormularioController extends Controller
         // dd($menor->id_menor);
         //expediente judicial
         
-        // $expediete_judicial = new ExpedienteJudicial();
+        $expediete_judicial = new ExpedienteJudicial();
         
-        // // ExpedienteJudicial::create([
-        // //$expediete_judicial->id_menor = 11;
-        // $expediete_judicial->autoridad_judicial = $request->autoridad_judicial;
-        // $expediete_judicial->estado_procesal = $request->estado_procesal;
-        // $expediete_judicial->fecha_inicio_proceso = $request->fecha_inicio_proceso;
-        // $expediete_judicial->carpeta_investigacion = $request->carpeta_investigacion;
-        // $expediete_judicial->observaciones_judiciales = $request->observaciones_judiciales;
-        // // ]);
-        // $expediete_judicial->save();
+        // ExpedienteJudicial::create([
+        $expediete_judicial->menor_id = $menor->id_menor;
+        $expediete_judicial->autoridad_judicial = $request->autoridad_judicial;
+        $expediete_judicial->estado_procesal = $request->estado_procesal;
+        $expediete_judicial->fecha_inicio_proceso = $request->fecha_inicio_proceso;
+        $expediete_judicial->carpeta_investigacion = $request->carpeta_investigacion;
+        $expediete_judicial->observaciones_judiciales = $request->observaciones_judiciales;
+        // ]);
+        $expediete_judicial->save();
 
         // DB::commit();
 
 
         // seguimiento
+        if ( $request->has('medida_tipo')) {
+            $tipos = (array) $request->medida_tipo;
+            $fechas = (array) $request->medida_fecha;
+            $estados = (array) $request->medida_estado;
+            // dd($tipos);
+            $tipo_atencion_id = 3;
+            if ( $request->juridico === 'Si' ) {
+                $tipo_atencion_id = 1;
+            } elseif ( $request->psicologico === 'Si' ) {
+                $tipo_atencion_id = 2;
+            }
+
+            foreach ($tipos as $index => $tipo) {
+                $menor->seguimientos()->create([
+                'tipo_atencion_id' => $tipo_atencion_id,
+                'detalles' => $tipos[$index] ?? '',
+                'fecha' => $fechas[$index] ?? '',
+                'estadp' => $estados[$index] ?? '',
+                ]);
+            }
+        }
         
+
 
 
 

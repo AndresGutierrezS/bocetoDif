@@ -37,7 +37,7 @@ class Menor extends Model
 
     public function progenitores()
     {
-        return $this->hasMany(Progenitor::class, 'menor_id');
+        return $this->hasMany(Progenitor::class, 'menor_id', 'id_menor');
     }
 
     public function expedienteJudicial()
@@ -45,5 +45,9 @@ class Menor extends Model
         return $this->hasOne(ExpedienteJudicial::class, 'menor_id', 'id_menor');
     }
 
+    public function seguimientos()
+    {
+        return $this->hasMany(Seguimiento::class, 'menor_id', 'id_menor');
+    }
 
 }

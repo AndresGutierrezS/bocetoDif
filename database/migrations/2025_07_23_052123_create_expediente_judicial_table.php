@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('expediente_judicial', function (Blueprint $table) {
             $table->id('id_expediente_judicial');
-            $table->foreignId('menor_id')->constrained('menor', 'id_menor')->onDelete('cascade');
+            $table->foreignId('menor_id')->constrained('menores', 'id_menor')->onDelete('cascade');
             $table->string('autoridad_judicial'); 
             $table->string('estado_procesal');
             $table->date('fecha_inicio_proceso')->nullable();

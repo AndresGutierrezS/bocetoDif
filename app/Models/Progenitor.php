@@ -20,6 +20,6 @@ class Progenitor extends Model
 
     public function menor() 
     {
-        return $this->belongsTo(Menor::class, 'menor_id');
+        return $this->belongsTo(Menor::class, 'menor_id', 'id_menor');
     }
 }
