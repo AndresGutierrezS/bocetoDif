@@ -22,7 +22,7 @@
             <div class="records-header">
                 <h2>Registros de Menores</h2>
                 <div class="records-actions">
-                    <button type="button" onclick="window.location.href='{{route('formulario')}}'">Nuevo Registro</button>
+                    <button type="button" onclick="window.location.href='{{route('formulario.index')}}'">Nuevo Registro</button>
                     {{--     --}}
                 </div>
             </div>
@@ -40,28 +40,37 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
+                
+                
+                @forelse ($menores as $menor)    
+                
                 <tbody>
                     <tr>
                         <td>
-                            <strong>María Fernanda López García</strong><br>
-                            <small>Femenino · 8 años</small>
+                            <strong>{{ $menor->nombre }} {{ $menor->apellido_paterno }} {{ $menor->apellido_materno }} </strong><br>
+                            <small>{{ $menor->sexo }} · {{ $menor->edad }} años</small>
                         </td>
-                        <td>LOGF0201015HDFRRA8</td>
-                        <td>01/01/2015</td>
-                        <td>15/03/2023</td>
-                        <td>Casa Hogar Esperanza</td>
-                        <td>DIF Municipal</td>
+                        <td>{{ $menor->curp }}</td>
+                        <td>{{ $menor->fecha_nacimiento }}</td>
+                        <td>{{ $menor->fecha_puesta }}</td>
+                        <td>{{ $menor->ubicacion_actual }}</td>
+                        <td>{{ $menor->equipo_id }}</td>
                         <td><span class="badge badge-active">Activo</span></td>
                         <td>
                             <div class="actions">
-                                <button type="button" onclick="window.location.href='{{route('formulario')}}'" title="Editar">✏️</button>
+                                <button type="button" onclick="window.location.href='{{route('formulario.index')}}'" title="Editar">✏️</button>
                                 <button type="button" onclick="window.location.href='{{route('visualizar')}}'" title="Ver detalles">👁️</button>
                                 {{-- <button title="Ver detalles">👁️</button> --}}
                                 <button title="Documentos">📄</button>
                             </div>
                         </td>
                     </tr>
+                @empty
                     <tr>
+                        <td colspan="8">No hay registros disponibles.</td>
+                    </tr>
+                @endforelse
+                    {{-- <tr>
                         <td>
                             <strong>Juan Carlos Martínez Sánchez</strong><br>
                             <small>Masculino · 10 años</small>
@@ -137,7 +146,7 @@
                             </div>
                         </td>
                     </tr>
-                </tbody>
+                </tbody> --}}
             </table>
             
             <div class="pagination">

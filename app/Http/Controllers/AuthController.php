@@ -26,7 +26,7 @@ class AuthController extends Controller
             'password' => $credentials['password']
         ])) {
             $request->session()->regenerate();
-            return redirect()->intended('inicio');
+            return redirect()->intended(url('/'));
         }
 
         return back()->withErrors([

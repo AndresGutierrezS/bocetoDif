@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('progenitores', function (Blueprint $table) {
-             $table->id('id_progenitor');
-            $table->foreignId('menor_id')->constrained('menor', 'id_menor');
+            $table->id('id_progenitor');
+            $table->foreignId('menor_id')->constrained('menores', 'id_menor');
             $table->string('nombre');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
