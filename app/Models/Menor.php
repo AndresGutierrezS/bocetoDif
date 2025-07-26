@@ -55,4 +55,9 @@ class Menor extends Model
         return $this->hasMany(MedidasProteccion::class, 'menor_id');
     }
 
+    public function fugas()
+    {
+        return $this->hasMany(Fuga::class, 'menor_id');
+    }
+
 }

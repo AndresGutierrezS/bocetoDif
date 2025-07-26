@@ -35,12 +35,40 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="nombre" class="required">Nombre(s)</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control" required>
+                            <input type="text" id="nombre" name="nombre" class="form-control">
+                            @error('nombre')
+                                <p style="
+                                background-color: #991b1b;  /* bg-red-800 */
+                                color: white;               /* text-white */
+                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
+                                margin-bottom: 0.5rem;
+                                border-radius: 0.5rem;      /* rounded-lg */
+                                font-size: 0.875rem;        /* text-sm */
+                                padding: 0.5rem;            /* p-2 */
+                                text-align: center;         /* text-center */
+                                ">
+                                Este campo debe ser numerico
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="apellidoPaterno" class="required">Apellido Paterno</label>
-                            <input type="text" id="apellidoPaterno" name="apellido_paterno" class="form-control" required>
+                            <input type="text" id="apellidoPaterno" name="apellido_paterno" class="form-control">
+                            @error('apellido_paterno')
+                                <p style="
+                                background-color: #991b1b;  /* bg-red-800 */
+                                color: white;               /* text-white */
+                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
+                                margin-bottom: 0.5rem;
+                                border-radius: 0.5rem;      /* rounded-lg */
+                                font-size: 0.875rem;        /* text-sm */
+                                padding: 0.5rem;            /* p-2 */
+                                text-align: center;         /* text-center */
+                                ">
+                                Este campo debe ser una cadena de texto
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
@@ -50,22 +78,50 @@
                         
                         <div class="form-group">
                             <label for="curp" class="required">CURP</label>
-                            <input type="text" id="curp" name="curp" class="form-control" required>
+                            <input type="text" id="curp" name="curp" class="form-control">
                         </div>
                         
                         <div class="form-group">
                             <label for="fechaNacimiento" class="required">Fecha de Nacimiento</label>
-                            <input type="date" id="fechaNacimiento" name="fecha_nacimiento" class="form-control" required>
+                            <input type="date" id="fechaNacimiento" name="fecha_nacimiento" class="form-control">
+                            @error('fecha_nacimiento')
+                                <p style="
+                                background-color: #991b1b;  /* bg-red-800 */
+                                color: white;               /* text-white */
+                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
+                                margin-bottom: 0.5rem;
+                                border-radius: 0.5rem;      /* rounded-lg */
+                                font-size: 0.875rem;        /* text-sm */
+                                padding: 0.5rem;            /* p-2 */
+                                text-align: center;         /* text-center */
+                                ">
+                                Fecha no valida
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="edad" class="required">Edad</label>
-                            <input type="number" id="edad" name="edad" class="form-control" min="0" max="18" required>
+                            <input type="number" id="edad" name="edad" class="form-control" min="0">
+                            @error('edad')
+                                <p style="
+                                background-color: #991b1b;  /* bg-red-800 */
+                                color: white;               /* text-white */
+                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
+                                margin-bottom: 0.5rem;
+                                border-radius: 0.5rem;      /* rounded-lg */
+                                font-size: 0.875rem;        /* text-sm */
+                                padding: 0.5rem;            /* p-2 */
+                                text-align: center;         /* text-center */
+                                ">
+                                Edad debe ser menor a 18
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="sexo" class="required">Sexo</label>
-                            <select id="sexo" name="sexo" class="form-control" required>
+                            <select id="sexo" name="sexo" class="form-control">
                                 <option value="" disabled>Seleccionar...</option>
                                 <option value="Femenino">Femenino</option>
                                 <option value="Masculino">Masculino</option>
@@ -90,16 +146,16 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="fechaIngreso" class="required">Fecha de Ingreso</label>
-                            <input type="date" id="fechaIngreso" name="fecha_ingreso" class="form-control" required>
+                            <input type="date" id="fechaIngreso" name="fecha_ingreso" class="form-control" >
                         </div>
                         
                         <div class="form-group">
                             <label for="albergue" class="required">Albergue</label>
                             <select id="albergue" name="albergue" class="form-control" required>
                                 <option value="">Seleccionar...</option>
-                                <option value="1">Casa Hogar Esperanza</option>
-                                <option value="2">Hogar Infantil San José</option>
-                                <option value="3">Albergue Niños Felices</option>
+                                <option value="Casa Hogar Esperanza">Casa Hogar Esperanza</option>
+                                <option value="Hogar Infantil San José">Hogar Infantil San José</option>
+                                <option value="Albergue Niños Felices">Albergue Niños Felices</option>
                             </select>
                         </div>
                         
@@ -328,7 +384,7 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="ubicacionTipo">Tipo de Ubicación</label>
-                            <select id="ubicacionTipo" class="form-control">
+                            <select id="ubicacionTipo" name="ubicacion_tipo" class="form-control">
                                 <option value="">Seleccionar...</option>
                                 <option value="Albergue">Albergue</option>
                                 <option value="Familiar">Familiar</option>
@@ -338,17 +394,17 @@
                         
                         <div class="form-group">
                             <label for="ubicacionNombre">Nombre (Albergue/Familiar)</label>
-                            <input type="text" id="ubicacionNombre" class="form-control">
+                            <input type="text" id="ubicacionNombre" name="ubicacion_nombre" class="form-control">
                         </div>
                         
                         <div class="form-group">
                             <label for="ubicacionParentesco">Parentesco (si aplica)</label>
-                            <input type="text" id="ubicacionParentesco" class="form-control">
+                            <input type="text" id="ubicacionParentesco" name="ubicacion_parentesco" class="form-control">
                         </div>
                         
                         <div class="form-group">
                             <label for="ubicacionEstatus">Estatus</label>
-                            <select id="ubicacionEstatus" class="form-control">
+                            <select id="ubicacionEstatus" name="ubicacion_estatus" class="form-control">
                                 <option value="">Seleccionar...</option>
                                 <option value="Temporal">Temporal</option>
                                 <option value="Permanente">Permanente</option>
@@ -359,7 +415,7 @@
                     
                     <div class="form-group">
                         <label for="ubicacionDireccion">Dirección</label>
-                        <textarea id="ubicacionDireccion" class="form-control form-textarea"></textarea>
+                        <textarea id="ubicacionDireccion" name="ubicacion_direccion" class="form-control form-textarea"></textarea>
                     </div>
                 </div>
                 
@@ -374,17 +430,17 @@
                         <div class="list-item">
                             <div class="form-group" style="flex: 1;">
                                 <label for="fugaFecha1">Fecha</label>
-                                <input type="date" id="fugaFecha1" class="form-control">
+                                <input type="date" id="fugaFecha1" name="fuga_fecha[]" class="form-control">
                             </div>
                             
                             <div class="form-group" style="flex: 2;">
                                 <label for="fugaDescripcion1">Descripción</label>
-                                <input type="text" id="fugaDescripcion1" class="form-control">
+                                <input type="text" id="fugaDescripcion1" name="fuga_descripcion[]" class="form-control">
                             </div>
                             
                             <div class="form-group" style="flex: 1;">
                                 <label for="fugaEstatus1">Estatus</label>
-                                <select id="fugaEstatus1" class="form-control">
+                                <select id="fugaEstatus1" name="fuga_estatus[]" class="form-control">
                                     <option value="">Seleccionar...</option>
                                     <option value="Localizado">Localizado</option>
                                     <option value="No localizado">No localizado</option>
@@ -515,17 +571,17 @@
             newItem.innerHTML = `
                 <div class="form-group" style="flex: 1;">
                     <label for="fugaFecha${count}">Fecha</label>
-                    <input type="date" id="fugaFecha${count}" class="form-control">
+                    <input type="date" id="fugaFecha${count}" name="fuga_fecha[]" class="form-control">
                 </div>
                 
                 <div class="form-group" style="flex: 2;">
                     <label for="fugaDescripcion${count}">Descripción</label>
-                    <input type="text" id="fugaDescripcion${count}" class="form-control">
+                    <input type="text" id="fugaDescripcion${count}" name="fuga_descripcion[]" class="form-control">
                 </div>
                 
                 <div class="form-group" style="flex: 1;">
                     <label for="fugaEstatus${count}">Estatus</label>
-                    <select id="fugaEstatus${count}" class="form-control">
+                    <select id="fugaEstatus${count}" name="figa_estatus[]" class="form-control">
                         <option value="">Seleccionar...</option>
                         <option value="Localizado">Localizado</option>
                         <option value="No localizado">No localizado</option>

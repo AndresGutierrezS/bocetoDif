@@ -30,23 +30,23 @@ class FormularioController extends Controller
         // try {
 
         // $request->validate([
-        //     'expediente_id' => ['required', 'number'],
+        //     'expediente_id' => ['required'],
         //     'nombre' => ['required', 'max:40', 'string'],
         //     'apellido_paterno' => ['required', 'max:30', 'string'],
-        //     'apellido_materno' => ['max:30', 'string'],
+        //     'apellido_materno' => ['max:30', 'string', 'required'],
         //     'fecha_nacimiento' => ['required', 'date'],
-        //     'edad'  => ['required', 'number'],
-        //     'curp'  => ['required', 'number'],
+        //     'edad'  => ['required'],
+        //     'curp'  => ['required'],
         //     'sexo'  => ['required'],
-        //     'discapacidad' => ['required'],
-        //     'tipo_discapacidad' => ['required'],
-        //     'equipo_id' => ['required'],
-        //     'fecha_puesta' => ['required'],
-        //     'ubicacion actual',
-        //     'albergue_id' => ['required'],
-        //     'estatus_id' => ['required'],
-        //     'observaciones',
-        //     'created_at'
+        //     // 'discapacidad' => ['required'],
+        //     // 'tipo_discapacidad' => ['required'],
+        //     // 'equipo_id' => ['required'],
+        //     // 'fecha_puesta' => ['required'],
+        //     // 'ubicacion actual',
+        //     // 'albergue_id' => ['required'],
+        //     // 'estatus_id' => ['required'],
+        //     // 'observaciones',
+        //     // 'created_at'
         // ]);
 
         $menor = new Menor();
@@ -151,6 +151,22 @@ class FormularioController extends Controller
                     'tipo_medida' => $tipos[$index],
                     'plan_restitucion' => $plan_restitucion,
                     'fecha' => $fechas[$index],
+                ]);
+            }
+        }
+
+
+        //fugas
+        if ($request->has('fuga_fecha')) {
+            $fechas = ( array ) $request->fuga_fecha;
+            $descripciones = ( array ) $request->fuga_descripcion;
+            $estatus = ( array ) $request->fuga_estatus;
+
+            foreach ($fechas as $index => $fecha) {
+                $menor->fugas()->create([
+                    'fecha' => $fecha ?? null,
+                    'detalles'=> $descripciones[$index] ?? null,
+                    //todo: 'estatus' => $estatus[$index];
                 ]);
             }
         }
