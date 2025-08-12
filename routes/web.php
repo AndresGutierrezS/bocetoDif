@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormularioController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\VisualizarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,7 @@ Route::post('/formulario', [FormularioController::class, 'store'])->name('formul
 //     return view('formulario');
 // })->name('formulario');
 
-Route::get('/visualizar', function () {
-    return view('visualizar');
-})->name('visualizar');
+Route::get('/visualizar/{menor: id_menor}', [VisualizarController::class, 'index'])->name('visualizar.index');
 
 // Route::get('/inicio', function () {
 //     return view('inicio');

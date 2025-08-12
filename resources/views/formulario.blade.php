@@ -16,7 +16,7 @@
                 <h2>Nuevo Registro de Menor</h2>
                     <div class="form-actions">
                     <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-secondary">Cancelar</button>
-                    <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-primary">Guardar Registro</button>
+                    {{-- <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-primary">Guardar Registro</button> --}}
                 </div>
             </div>
             
@@ -35,86 +35,55 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="nombre" class="required">Nombre(s)</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control">
+                            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ old('nombre') }}">
                             @error('nombre')
-                                <p style="
-                                background-color: #991b1b;  /* bg-red-800 */
-                                color: white;               /* text-white */
-                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
-                                margin-bottom: 0.5rem;
-                                border-radius: 0.5rem;      /* rounded-lg */
-                                font-size: 0.875rem;        /* text-sm */
-                                padding: 0.5rem;            /* p-2 */
-                                text-align: center;         /* text-center */
-                                ">
-                                Este campo debe ser numerico
+                                <p class="error">
+                                    {{ $message }}
                                 </p>
                             @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="apellidoPaterno" class="required">Apellido Paterno</label>
-                            <input type="text" id="apellidoPaterno" name="apellido_paterno" class="form-control">
+                            <input type="text" id="apellidoPaterno" name="apellido_paterno" class="form-control" value="{{ old('apellido_paterno') }}">
                             @error('apellido_paterno')
-                                <p style="
-                                background-color: #991b1b;  /* bg-red-800 */
-                                color: white;               /* text-white */
-                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
-                                margin-bottom: 0.5rem;
-                                border-radius: 0.5rem;      /* rounded-lg */
-                                font-size: 0.875rem;        /* text-sm */
-                                padding: 0.5rem;            /* p-2 */
-                                text-align: center;         /* text-center */
-                                ">
-                                Este campo debe ser una cadena de texto
+                                <p class="error">
+                                    {{ $message }}
                                 </p>
                             @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="apellidoMaterno">Apellido Materno</label>
-                            <input type="text" id="apellidoMaterno" name="apellido_materno" class="form-control">
+                            <input type="text" id="apellidoMaterno" name="apellido_materno" class="form-control" value="{{ old('apellido_materno')}} ">
                         </div>
                         
                         <div class="form-group">
                             <label for="curp" class="required">CURP</label>
-                            <input type="text" id="curp" name="curp" class="form-control">
+                            <input type="text" id="curp" name="curp" class="form-control" value="{{ old('curp')}} ">
+                            @error('curp')
+                                <p class="curp">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="fechaNacimiento" class="required">Fecha de Nacimiento</label>
-                            <input type="date" id="fechaNacimiento" name="fecha_nacimiento" class="form-control">
+                            <input type="date" id="fechaNacimiento" name="fecha_nacimiento" class="form-control" value="{{ old('fecha_nacimiento') }}">
                             @error('fecha_nacimiento')
-                                <p style="
-                                background-color: #991b1b;  /* bg-red-800 */
-                                color: white;               /* text-white */
-                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
-                                margin-bottom: 0.5rem;
-                                border-radius: 0.5rem;      /* rounded-lg */
-                                font-size: 0.875rem;        /* text-sm */
-                                padding: 0.5rem;            /* p-2 */
-                                text-align: center;         /* text-center */
-                                ">
-                                Fecha no valida
+                                <p class="error">
+                                    {{ $message }}
                                 </p>
                             @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="edad" class="required">Edad</label>
-                            <input type="number" id="edad" name="edad" class="form-control" min="0">
+                            <input type="number" id="edad" name="edad" class="form-control" value="{{ old('edad') }}">
                             @error('edad')
-                                <p style="
-                                background-color: #991b1b;  /* bg-red-800 */
-                                color: white;               /* text-white */
-                                margin-top: 0.5rem;         /* my-2 = margin-top/bottom: 0.5rem */
-                                margin-bottom: 0.5rem;
-                                border-radius: 0.5rem;      /* rounded-lg */
-                                font-size: 0.875rem;        /* text-sm */
-                                padding: 0.5rem;            /* p-2 */
-                                text-align: center;         /* text-center */
-                                ">
-                                Edad debe ser menor a 18
+                                <p class="error">
+                                    {{ $message }}
                                 </p>
                             @enderror
                         </div>
@@ -122,16 +91,26 @@
                         <div class="form-group">
                             <label for="sexo" class="required">Sexo</label>
                             <select id="sexo" name="sexo" class="form-control">
-                                <option value="" disabled>Seleccionar...</option>
+                                <option value="">Seleccionar...</option>
                                 <option value="Femenino">Femenino</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Otro">Otro</option>
                             </select>
+                            @error('sexo')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
-                            <input type="text" id="nacionalidad" name="nacionalidad" class="form-control" value="Mexicana">
+                            <input type="text" id="nacionalidad" name="nacionalidad" class="form-control" value="{{ old('nacionalidad') }}">
+                            @error('nacionalidad')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -146,33 +125,53 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="fechaIngreso" class="required">Fecha de Ingreso</label>
-                            <input type="date" id="fechaIngreso" name="fecha_ingreso" class="form-control" >
+                            <input type="date" id="fechaIngreso" name="fecha_ingreso" class="form-control" value="{{ old('fecha_ingreso')}}">
+                            @error('fecha_ingreso')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="albergue" class="required">Albergue</label>
-                            <select id="albergue" name="albergue" class="form-control" required>
+                            <select id="albergue" name="albergue" class="form-control">
                                 <option value="">Seleccionar...</option>
                                 <option value="Casa Hogar Esperanza">Casa Hogar Esperanza</option>
                                 <option value="Hogar Infantil San José">Hogar Infantil San José</option>
                                 <option value="Albergue Niños Felices">Albergue Niños Felices</option>
                             </select>
+                            @error('albergue')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="autoridad" class="required">Autoridad que Ingresa</label>
-                            <select id="autoridad" name="autoridad" class="form-control" required>
+                            <select id="autoridad" name="autoridad" class="form-control" >
                                 <option value="">Seleccionar...</option>
                                 <option value="1">DIF Municipal</option>
                                 <option value="2">DIF Estatal</option>
                                 <option value="3">Fiscalía</option>
                                 <option value="4">Policía</option>
                             </select>
+                            @error('autoridad')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="motivoIngreso">Motivo de Ingreso</label>
-                            <textarea id="motivoIngreso" name="motivo_ingreso" class="form-control form-textarea"></textarea>
+                            <textarea id="motivoIngreso" name="motivo_ingreso" class="form-control form-textarea">{{ old('motivo_ingreso') }}</textarea>
+                            @error('motivo_ingreso')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -188,17 +187,32 @@
                         <div class="list-item">
                             <div class="form-group" style="flex: 1;">
                                 <label for="progenitorNombre1">Nombre(s)</label>
-                                <input type="text" id="progenitorNombre1" name="progenitor_nombre[]" class="form-control">
+                                <input type="text" id="progenitorNombre1" name="progenitor_nombre[]" class="form-control" value="{{ old('progenitor_nombre[]' )}}">
+                                @error('progenitor_nombre[]')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                             </div>
                             
                             <div class="form-group" style="flex: 1;">
                                 <label for="progenitorApellidoPaterno1">Apellido Paterno</label>
-                                <input type="text" id="progenitorApellidoPaterno1" name="progenitor_apellido_paterno[]" class="form-control">
+                                <input type="text" id="progenitorApellidoPaterno1" name="progenitor_apellido_paterno[]" class="form-control" value="{{ old('progenitor_apellido_paterno[]') }}">
+                                @error('progenitor_apellido_paterno[]')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror 
                             </div>
                             
                             <div class="form-group" style="flex: 1;">
                                 <label for="progenitorApellidoMaterno1">Apellido Materno</label>
-                                <input type="text" id="progenitorApellidoMaterno1" name="progenitor_apellido_materno[]" class="form-control">
+                                <input type="text" id="progenitorApellidoMaterno1" name="progenitor_apellido_materno[]" class="form-control" value="{{ old('progenitor_apellido_materno[]')}}">
+                                @error('progenitor_apellido_materno[]')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                             </div>
                             
                             <div class="form-group" style="flex: 1;">
@@ -210,6 +224,11 @@
                                     <option value="Tutor">Tutor</option>
                                     <option value="Otro">Otro</option>
                                 </select>
+                                @error('progenitor_relacion[]')
+                                    <p class="error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                             
                             <div class="form-group" style="flex: 1;">
@@ -221,11 +240,21 @@
                                     <option value="Fallecido">Fallecido</option>
                                     <option value="Desconocido">Desconocido</option>
                                 </select>
+                                @error('progenitor_estado[]')
+                                    <p class="error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
 
                             <div class="form-group" style="flex: 1;">
                                 <label for="progenitorTelefono1">Teléfono</label>
-                                <input type="tel" id="progenitorTelefono1" name="progenitor_telefono[]" class="form-control">
+                                <input type="tel" id="progenitorTelefono1" name="progenitor_telefono[]" class="form-control" value="{{ old('progenitor_telefono[]') }}">
+                                @error('progenitor_telefono[]')
+                                    <p class="error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                                             
                             <span class="remove-item">×</span>
@@ -251,6 +280,11 @@
                                 <option value="1">Juzgado de Menores</option>
                                 <option value="2">Fiscalía Especializada</option>
                             </select>
+                            @error('autoridad_judicial')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
@@ -262,22 +296,42 @@
                                 <option value="Sentenciado">Sentenciado</option>
                                 <option value="Archivado">Archivado</option>
                             </select>
+                            @error('estado_procesal')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="fechaInicioProceso">Fecha de Inicio</label>
-                            <input type="date" id="fechaInicioProceso" name="fecha_inicio_proceso" class="form-control">
+                            <input type="date" id="fechaInicioProceso" name="fecha_inicio_proceso" class="form-control" value="{{ old('fecha_inicio_proceso')}}">
+                            @error('fecha_inicio_proceso')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="carpetaInvestigacion">Carpeta de Investigación</label>
-                            <input type="text" id="carpetaInvestigacion" name="carpeta_investigacion" class="form-control">
+                            <input type="text" id="carpetaInvestigacion" name="carpeta_investigacion" class="form-control" value="{{ old('carpeta_investigacion')}}">
+                            @error('carpeta_investigacion')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="observacionesJudiciales">Observaciones</label>
-                        <textarea id="observacionesJudiciales" name="observaciones_judiciales" class="form-control form-textarea"></textarea>
+                        <textarea id="observacionesJudiciales" name="observaciones_judiciales" class="form-control form-textarea">{{ old('observaciones_judiciales') }}</textarea>
+                        @error('observaciones_judiciales')
+                            <p class="error">
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -349,11 +403,21 @@
                                         <option value="Tutela">Tutela</option>
                                         <option value="Pérdida patria potestad">Pérdida patria potestad</option>
                                     </select>
+                                    @error('medida_tipo[]')
+                                        <p class="error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                                 
                                 <div class="form-group" style="flex: 1;">
                                     <label for="medidaFecha1">Fecha de Inicio</label>
-                                    <input type="date" id="medidaFecha1" name="medida_fecha[]" class="form-control">
+                                    <input type="date" id="medidaFecha1" name="medida_fecha[]" class="form-control" value="{{old('medida_fecha[]')}}">
+                                    @error('medida_fecha[]')
+                                        <p class="error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                                 
                                 <div class="form-group" style="flex: 1;">
@@ -363,6 +427,11 @@
                                         <option value="Vigente">Vigente</option>
                                         <option value="Concluida">Concluida</option>
                                     </select>
+                                    @error('medida_estado[]')
+                                        <p class="error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                                 
                                 <span class="remove-item">×</span>
@@ -390,16 +459,31 @@
                                 <option value="Familiar">Familiar</option>
                                 <option value="Otro">Otro</option>
                             </select>
+                            @error('ubicacion_tipo')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="ubicacionNombre">Nombre (Albergue/Familiar)</label>
-                            <input type="text" id="ubicacionNombre" name="ubicacion_nombre" class="form-control">
+                            <input type="text" id="ubicacionNombre" name="ubicacion_nombre" class="form-control" value="{{ old('ubicacion_nombre') }}">
+                            @error('ubicacion_nombre')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
                             <label for="ubicacionParentesco">Parentesco (si aplica)</label>
-                            <input type="text" id="ubicacionParentesco" name="ubicacion_parentesco" class="form-control">
+                            <input type="text" id="ubicacionParentesco" name="ubicacion_parentesco" class="form-control" value="{{ old('ubicacion_parentesco') }}">
+                            @error('ubicacion_parentesco')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                         
                         <div class="form-group">
@@ -410,12 +494,22 @@
                                 <option value="Permanente">Permanente</option>
                                 <option value="En transición">En transición</option>
                             </select>
+                            @error('ubicacion_estatus')
+                                <p class="error">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="ubicacionDireccion">Dirección</label>
-                        <textarea id="ubicacionDireccion" name="ubicacion_direccion" class="form-control form-textarea"></textarea>
+                        <textarea id="ubicacionDireccion" name="ubicacion_direccion" class="form-control form-textarea">{{ old('ubicacion_direccion' )}}</textarea>
+                        @error('ubicacion_direccion')
+                            <p class="error">
+                                {{ $message }}
+                            </p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -430,12 +524,22 @@
                         <div class="list-item">
                             <div class="form-group" style="flex: 1;">
                                 <label for="fugaFecha1">Fecha</label>
-                                <input type="date" id="fugaFecha1" name="fuga_fecha[]" class="form-control">
+                                <input type="date" id="fugaFecha1" name="fuga_fecha[]" class="form-control" value="{{old('fuga_fecha[]')}}">
+                                @error('fuga_fecha[]')
+                                    <p class="error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                             
                             <div class="form-group" style="flex: 2;">
                                 <label for="fugaDescripcion1">Descripción</label>
-                                <input type="text" id="fugaDescripcion1" name="fuga_descripcion[]" class="form-control">
+                                <input type="text" id="fugaDescripcion1" name="fuga_descripcion[]" class="form-control" value="fuga_descripcion[]">
+                                @error('fuga_descripcion[]')
+                                <p class="error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                             
                             <div class="form-group" style="flex: 1;">
@@ -445,6 +549,11 @@
                                     <option value="Localizado">Localizado</option>
                                     <option value="No localizado">No localizado</option>
                                 </select>
+                                @error('fuga_estatus[]')
+                                    <p class="error">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                             </div>
                             
                             <span class="remove-item">×</span>

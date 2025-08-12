@@ -29,25 +29,25 @@ class FormularioController extends Controller
 
         // try {
 
-        // $request->validate([
-        //     'expediente_id' => ['required'],
-        //     'nombre' => ['required', 'max:40', 'string'],
-        //     'apellido_paterno' => ['required', 'max:30', 'string'],
-        //     'apellido_materno' => ['max:30', 'string', 'required'],
-        //     'fecha_nacimiento' => ['required', 'date'],
-        //     'edad'  => ['required'],
-        //     'curp'  => ['required'],
-        //     'sexo'  => ['required'],
-        //     // 'discapacidad' => ['required'],
-        //     // 'tipo_discapacidad' => ['required'],
-        //     // 'equipo_id' => ['required'],
-        //     // 'fecha_puesta' => ['required'],
-        //     // 'ubicacion actual',
-        //     // 'albergue_id' => ['required'],
-        //     // 'estatus_id' => ['required'],
-        //     // 'observaciones',
-        //     // 'created_at'
-        // ]);
+        $request->validate([
+            'expediente_id' => ['required'],
+            'nombre' => ['required', 'max:40', 'string'],
+            'apellido_paterno' => ['required', 'max:30', 'string'],
+            'apellido_materno' => ['max:30', 'string', 'required'],
+            'fecha_nacimiento' => ['required', 'date'],
+            'edad'  => ['required', 'numeric'],
+            'curp'  => ['required'],
+            'sexo'  => ['required'],
+            // 'discapacidad' => ['required'],
+            // 'tipo_discapacidad' => ['required'],
+            // 'equipo_id' => ['required'],
+            // 'fecha_puesta' => ['required'],
+            // 'ubicacion actual',
+            // 'albergue_id' => ['required'],
+            // 'estatus_id' => ['required'],
+            // 'observaciones',
+            // 'created_at'
+        ]);
 
         $menor = new Menor();
 

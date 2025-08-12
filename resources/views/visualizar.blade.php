@@ -280,7 +280,7 @@
         <!-- Botones de acción -->
         <div class="actions-toolbar">
             <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('inicio')}}'">Regresar</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('formulario')}}'">Editar Registro</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('formulario.index')}}'">Editar Registro</button>
             <button class="btn btn-danger">Dar de Baja</button>
         </div>
     </main>

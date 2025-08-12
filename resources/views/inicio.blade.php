@@ -59,7 +59,7 @@
                         <td>
                             <div class="actions">
                                 <button type="button" onclick="window.location.href='{{route('formulario.index')}}'" title="Editar">✏️</button>
-                                <button type="button" onclick="window.location.href='{{route('visualizar')}}'" title="Ver detalles">👁️</button>
+                                <button type="button" onclick="window.location.href=#" title="Ver detalles">👁️</button>
                                 {{-- <button title="Ver detalles">👁️</button> --}}
                                 <button title="Documentos">📄</button>
                             </div>
