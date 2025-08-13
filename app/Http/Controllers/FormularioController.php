@@ -184,4 +184,11 @@ class FormularioController extends Controller
         // return back()->withErrors(['error' => 'Hubo un error al guardar los datos: ' . $e->getMessage()]);
     // }
     }
+
+    public function edit(Menor $menor)
+    {
+        return view('editar_menor', [
+            'menor' => $menor
+        ]);
+    }
 }

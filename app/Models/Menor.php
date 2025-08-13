@@ -60,4 +60,9 @@ class Menor extends Model
         return $this->hasMany(Fuga::class, 'menor_id');
     }
 
+    public function albergue()
+    {
+        return $this->hasOne(Albergue::class, 'albergue_id');
+    }
+
 }
