@@ -133,11 +133,11 @@ class FormularioController extends Controller
             // dd($tipos);
             $plan_restitucion = '';
             if ( $request->juridico === 'Si' ) {
-                $plan_restitucion .= 'seguimiento juridico\n';
+                $plan_restitucion .= 'seguimiento juridico';
             } elseif ( $request->psicologico === 'Si' ) {
-                $plan_restitucion .= 'seguimiento psicologico\n';
+                $plan_restitucion .= 'seguimiento psicologico';
             } elseif ( $request->social === 'Si' ) {
-                $plan_restitucion .= 'seguimiento social\n';
+                $plan_restitucion .= 'seguimiento social';
             }
             
 
@@ -188,6 +188,13 @@ class FormularioController extends Controller
     public function edit(Menor $menor)
     {
         return view('editar_menor', [
+            'menor' => $menor
+        ]);
+    }
+
+    public function show(Menor $menor)
+    {
+        return view('visualizar', [
             'menor' => $menor
         ]);
     }

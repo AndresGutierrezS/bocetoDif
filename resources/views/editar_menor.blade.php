@@ -183,7 +183,67 @@
                     </div>
                     
                     <div class="dynamic-list" id="progenitores-list">
-                        <!-- Item de ejemplo -->
+                        @foreach($menor->progenitores as $index => $progenitor)
+                            <div class="list-item">
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Nombre(s)</label>
+                                    <input type="text" 
+                                        name="progenitor_nombre[]" 
+                                        class="form-control" 
+                                        value="{{ old('progenitor_nombre.' . $index, $progenitor->nombre) }}">
+                                </div>
+
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Apellido Paterno</label>
+                                    <input type="text" 
+                                        name="progenitor_apellido_paterno[]" 
+                                        class="form-control" 
+                                        value="{{ old('progenitor_apellido_paterno.' . $index, $progenitor->apellido_paterno) }}">
+                                </div>
+
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Apellido Materno</label>
+                                    <input type="text" 
+                                        name="progenitor_apellido_materno[]" 
+                                        class="form-control" 
+                                        value="{{ old('progenitor_apellido_materno.' . $index, $progenitor->apellido_materno) }}">
+                                </div>
+
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Relación</label>
+                                    <select name="progenitor_relacion[]" class="form-control">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="Madre" {{ old('progenitor_relacion.' . $index, $progenitor->relacion) == 'Madre' ? 'selected' : '' }}>Madre</option>
+                                        <option value="Padre" {{ old('progenitor_relacion.' . $index, $progenitor->relacion) == 'Padre' ? 'selected' : '' }}>Padre</option>
+                                        <option value="Tutor" {{ old('progenitor_relacion.' . $index, $progenitor->relacion) == 'Tutor' ? 'selected' : '' }}>Tutor</option>
+                                        <option value="Otro" {{ old('progenitor_relacion.' . $index, $progenitor->relacion) == 'Otro' ? 'selected' : '' }}>Otro</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Estado Actual</label>
+                                    <select name="progenitor_estado[]" class="form-control">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="Ubicado" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'Ubicado' ? 'selected' : '' }}>Ubicado</option>
+                                        <option value="No ubicado" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'No ubicado' ? 'selected' : '' }}>No ubicado</option>
+                                        <option value="Fallecido" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'Fallecido' ? 'selected' : '' }}>Fallecido</option>
+                                        <option value="Desconocido" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'Desconocido' ? 'selected' : '' }}>Desconocido</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Teléfono</label>
+                                    <input type="tel" 
+                                        name="progenitor_telefono[]" 
+                                        class="form-control" 
+                                        value="{{ old('progenitor_telefono.' . $index, $progenitor->telefono) }}">
+                                </div>
+
+                                <span class="remove-item">×</span>
+                            </div>
+                        @endforeach
+                        
+                        {{-- <!-- Item de ejemplo -->
                         <div class="list-item">
                             <div class="form-group" style="flex: 1;">
                                 <label for="progenitorNombre1">Nombre(s)</label>
@@ -258,7 +318,7 @@
                             </div>
                                             
                             <span class="remove-item">×</span>
-                        </div>
+                        </div> --}}
                     </div>
                     
                     <div class="add-item" id="add-progenitor">
@@ -276,9 +336,9 @@
                         <div class="form-group">
                             <label for="autoridadJudicial">Autoridad Judicial</label>
                             <select id="autoridadJudicial" name="autoridad_judicial" class="form-control">
-                                <option value="">Seleccionar...</option>
-                                <option value="1">Juzgado de Menores</option>
-                                <option value="2">Fiscalía Especializada</option>
+                                <option value="" disabled {{old('autoridad_judicial', $menor->expedienteJudicial->autoridad_judicial) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                <option value="Juzgado de Menores" {{old('autoridad_judicial', $menor->expedienteJudicial->autoridad_judicial) == 'Juzgado de Menores' ? 'selected' : '' }}>Juzgado de Menores</option>
+                                <option value="Fiscalía Especializada" {{old('autoridad_judicial', $menor->expedienteJudicial->autoridad_judicial) == 'Fiscalía Especializada' ? 'selected' : '' }}>Fiscalía Especializada</option>
                             </select>
                             @error('autoridad_judicial')
                                 <p class="error">
@@ -290,11 +350,11 @@
                         <div class="form-group">
                             <label for="estadoProcesal">Estado Procesal</label>
                             <select id="estadoProcesal" name="estado_procesal" class="form-control">
-                                <option value="">Seleccionar...</option>
-                                <option value="En investigación">En investigación</option>
-                                <option value="Proceso judicial">Proceso judicial</option>
-                                <option value="Sentenciado">Sentenciado</option>
-                                <option value="Archivado">Archivado</option>
+                                <option value="" disabled {{old('estado_procesal', $menor->expedienteJudicial->estado_procesal) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                <option value="En investigación" {{ old('estado_procesal', $menor->expedienteJudicial->estado_procesal) == 'En investigación' ? 'selected' : '' }}>En investigación</option>
+                                <option value="Proceso judicial" {{ old('estado_procesal', $menor->expedienteJudicial->estado_procesal) == 'Proceso judicial' ? 'selected' : '' }}>Proceso judicial</option>
+                                <option value="Sentenciado" {{ old('estado_procesal', $menor->expedienteJudicial->estado_procesal) == 'Sentenciado' ? 'selected' : '' }}>Sentenciado</option>
+                                <option value="Archivado" {{ old('estado_procesal', $menor->expedienteJudicial->estado_procesal) == 'Archivado' ? 'selected' : '' }}>Archivado</option>
                             </select>
                             @error('estado_procesal')
                                 <p class="error">
@@ -305,7 +365,7 @@
                         
                         <div class="form-group">
                             <label for="fechaInicioProceso">Fecha de Inicio</label>
-                            <input type="date" id="fechaInicioProceso" name="fecha_inicio_proceso" class="form-control" value="{{ old('fecha_inicio_proceso')}}">
+                            <input type="date" id="fechaInicioProceso" name="fecha_inicio_proceso" class="form-control" value="{{ old('fecha_inicio_proceso', $menor->expedienteJudicial->fecha_inicio_proceso )}}">
                             @error('fecha_inicio_proceso')
                                 <p class="error">
                                     {{ $message }}
@@ -315,7 +375,7 @@
                         
                         <div class="form-group">
                             <label for="carpetaInvestigacion">Carpeta de Investigación</label>
-                            <input type="text" id="carpetaInvestigacion" name="carpeta_investigacion" class="form-control" value="{{ old('carpeta_investigacion')}}">
+                            <input type="text" id="carpetaInvestigacion" name="carpeta_investigacion" class="form-control" value="{{ old('carpeta_investigacion', $menor->expedienteJudicial->carpeta_investigacion )}}">
                             @error('carpeta_investigacion')
                                 <p class="error">
                                     {{ $message }}
@@ -326,7 +386,7 @@
                     
                     <div class="form-group">
                         <label for="observacionesJudiciales">Observaciones</label>
-                        <textarea id="observacionesJudiciales" name="observaciones_judiciales" class="form-control form-textarea">{{ old('observaciones_judiciales') }}</textarea>
+                        <textarea id="observacionesJudiciales" name="observaciones_judiciales" class="form-control form-textarea">{{ old('observaciones_judiciales', $menor->expedienteJudicial->observaciones_judiciales ) }}</textarea>
                         @error('observaciones_judiciales')
                             <p class="error">
                                 {{ $message }}
@@ -394,48 +454,51 @@
                         
                         <div class="dynamic-list" id="medidas-list">
                             <!-- Item de ejemplo -->
-                            <div class="list-item">
-                                <div class="form-group" style="flex: 1;">
-                                    <label for="medidaTipo1">Tipo de Medida</label>
-                                    <select id="medidaTipo1" name="medida_tipo[]" class="form-control">
-                                        <option value="">Seleccionar...</option>
-                                        <option value="Custodia">Custodia</option>
-                                        <option value="Tutela">Tutela</option>
-                                        <option value="Pérdida patria potestad">Pérdida patria potestad</option>
-                                    </select>
-                                    @error('medida_tipo[]')
-                                        <p class="error">
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
+                            @foreach ($menor->medidasProteccion as $index => $medida)
                                 
-                                <div class="form-group" style="flex: 1;">
-                                    <label for="medidaFecha1">Fecha de Inicio</label>
-                                    <input type="date" id="medidaFecha1" name="medida_fecha[]" class="form-control" value="{{old('medida_fecha[]')}}">
-                                    @error('medida_fecha[]')
-                                        <p class="error">
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
+                                <div class="list-item">
+                                    <div class="form-group" style="flex: 1;">
+                                        <label for="medidaTipo1">Tipo de Medida</label>
+                                        <select id="medidaTipo1" name="medida_tipo[]" class="form-control">
+                                            <option value="" disabled {{ old('medida_tipo[]', $medida->tipo_medida) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                            <option value="Custodia" {{ old('medida_tipo[]', $medida->tipo_medida) == 'Custodia' ? 'selected' : '' }}>Custodia</option>
+                                            <option value="Tutela" {{ old('medida_tipo[]', $medida->tipo_medida) == 'Tutela' ? 'selected' : '' }}>Tutela</option>
+                                            <option value="Pérdida patria potestad" {{ old('medida_tipo[]', $medida->tipo_medida) == 'Pérdida patria potestad' ? 'selected' : '' }}>Pérdida patria potestad</option>
+                                        </select>
+                                        @error('medida_tipo[]')
+                                            <p class="error">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="form-group" style="flex: 1;">
+                                        <label for="medidaFecha1">Fecha de Inicio</label>
+                                        <input type="date" id="medidaFecha1" name="medida_fecha[]" class="form-control" value="{{old('medida_fecha[]', $medida->fecha)}}">
+                                        @error('medida_fecha[]')
+                                            <p class="error">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
+                                    
+                                    <div class="form-group" style="flex: 1;">
+                                        <label for="medidaEstado1">Estado</label>
+                                        <select id="medidaEstado1" name="medida_estado[]" class="form-control">
+                                            <option value="" disabled {{old('medida_estado[]', $medida->detalles_medida) == '' ? 'selected' : ''}}>Seleccionar...</option>
+                                            <option value="Vigente" {{old('medida_estado[]', $medida->detalles_medida) == 'Vigente' ? 'selected' : ''}}>Vigente</option>
+                                            <option value="Concluida" {{old('medida_estado[]', $medida->detalles_medida) == 'Concluida' ? 'selected' : ''}}>Concluida</option>
+                                        </select>
+                                        @error('medida_estado[]')
+                                            <p class="error">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+                                    </div>
+                                    
+                                    <span class="remove-item">×</span>
                                 </div>
-                                
-                                <div class="form-group" style="flex: 1;">
-                                    <label for="medidaEstado1">Estado</label>
-                                    <select id="medidaEstado1" name="medida_estado[]" class="form-control">
-                                        <option value="">Seleccionar...</option>
-                                        <option value="Vigente">Vigente</option>
-                                        <option value="Concluida">Concluida</option>
-                                    </select>
-                                    @error('medida_estado[]')
-                                        <p class="error">
-                                            {{ $message }}
-                                        </p>
-                                    @enderror
-                                </div>
-                                
-                                <span class="remove-item">×</span>
-                            </div>
+                            @endforeach
                         </div>
                         
                         <div class="add-item" id="add-medida">
@@ -521,43 +584,46 @@
                     
                     <div class="dynamic-list" id="fugas-list">
                         <!-- Item de ejemplo -->
-                        <div class="list-item">
-                            <div class="form-group" style="flex: 1;">
-                                <label for="fugaFecha1">Fecha</label>
-                                <input type="date" id="fugaFecha1" name="fuga_fecha[]" class="form-control" value="{{old('fuga_fecha[]')}}">
-                                @error('fuga_fecha[]')
+                        @foreach ($menor->fugas as $index => $fuga)
+                        
+                            <div class="list-item">
+                                <div class="form-group" style="flex: 1;">
+                                    <label for="fugaFecha1">Fecha</label>
+                                    <input type="date" id="fugaFecha1" name="fuga_fecha[]" class="form-control" value="{{old('fuga_fecha[]', $fuga->fecha)}}">
+                                    @error('fuga_fecha[]')
+                                        <p class="error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group" style="flex: 2;">
+                                    <label for="fugaDescripcion1">Descripción</label>
+                                    <input type="text" id="fugaDescripcion1" name="fuga_descripcion[]" class="form-control" value="{{old('fuga_descripcion[]', $fuga->detalles)}}">
+                                    @error('fuga_descripcion[]')
                                     <p class="error">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group" style="flex: 1;">
+                                    <label for="fugaEstatus1">Estatus</label>
+                                    <select id="fugaEstatus1" name="fuga_estatus[]" class="form-control">
+                                        <option value="">Seleccionar...</option>
+                                        <option value="Localizado">Localizado</option>
+                                        <option value="No localizado">No localizado</option>
+                                    </select>
+                                    @error('fuga_estatus[]')
+                                        <p class="error">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
+                                </div>
+                                
+                                <span class="remove-item">×</span>
                             </div>
-                            
-                            <div class="form-group" style="flex: 2;">
-                                <label for="fugaDescripcion1">Descripción</label>
-                                <input type="text" id="fugaDescripcion1" name="fuga_descripcion[]" class="form-control" value="fuga_descripcion[]">
-                                @error('fuga_descripcion[]')
-                                <p class="error">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
-                            
-                            <div class="form-group" style="flex: 1;">
-                                <label for="fugaEstatus1">Estatus</label>
-                                <select id="fugaEstatus1" name="fuga_estatus[]" class="form-control">
-                                    <option value="">Seleccionar...</option>
-                                    <option value="Localizado">Localizado</option>
-                                    <option value="No localizado">No localizado</option>
-                                </select>
-                                @error('fuga_estatus[]')
-                                    <p class="error">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
-                            </div>
-                            
-                            <span class="remove-item">×</span>
-                        </div>
+                        @endforeach
                     </div>
                     
                     <div class="add-item" id="add-fuga">

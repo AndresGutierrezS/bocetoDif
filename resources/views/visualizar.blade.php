@@ -16,15 +16,15 @@
         <div class="profile-header">
             <img src="{{ asset('images/menorFemina.png') }}" alt="Foto" class="profile-photo">
             <div class="profile-info">
-                <h2>María Fernanda López García</h2>
+                <h2>{{$menor->nombre}} {{$menor->apellido_paterno}} {{$menor->apellido_materno}}</h2>
                 <div class="profile-meta">
-                    <span class="meta-item">CURP: LOGF0201015HDFRRA8</span>
-                    <span class="meta-item">Edad: 8 años</span>
-                    <span class="meta-item">Sexo: Femenino</span>
+                    <span class="meta-item">CURP: {{$menor->curp}}</span>
+                    <span class="meta-item">Edad: {{$menor->edad}} años</span>
+                    <span class="meta-item">Sexo: {{$menor->sexo}}</span>
                 </div>
                 <div>
                     <span class="status-badge badge-active">Activo</span>
-                    <span class="meta-item">Registro: 15/03/2023</span>
+                    <span class="meta-item">Registro: {{$menor->fecha_puesta}}</span>
                 </div>
             </div>
         </div>
@@ -38,23 +38,23 @@
                 <div class="detail-grid">
                     <div class="detail-item">
                         <span class="detail-label">Nombre Completo</span>
-                        <div class="detail-value">María Fernanda López García</div>
+                        <div class="detail-value">{{$menor->nombre}} {{$menor->apellido_paterno}} {{$menor->apellido_materno}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">CURP</span>
-                        <div class="detail-value">LOGF0201015HDFRRA8</div>
+                        <div class="detail-value">{{$menor->curp}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Fecha de Nacimiento</span>
-                        <div class="detail-value">01/01/2015</div>
+                        <div class="detail-value">{{$menor->fecha_nacimiento}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Sexo</span>
-                        <div class="detail-value">Femenino</div>
+                        <div class="detail-value">{{$menor->sexo}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Nacionalidad</span>
-                        <div class="detail-value">Mexicana</div>
+                        <div class="detail-value">todo</div>
                     </div>
                     {{-- <div class="detail-item">
                         <span class="detail-label">Estado de Origen</span>
@@ -73,19 +73,19 @@
                 <div class="detail-grid">
                     <div class="detail-item">
                         <span class="detail-label">Fecha de Ingreso</span>
-                        <div class="detail-value">15/03/2023</div>
+                        <div class="detail-value">{{$menor->fecha_puesta}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Albergue Actual</span>
-                        <div class="detail-value">Casa Hogar Esperanza</div>
+                        <div class="detail-value">{{$menor->ubicacion_actual}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Autoridad que Ingresó</span>
-                        <div class="detail-value">DIF Municipal</div>
+                        <div class="detail-value">todo</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Motivo de Ingreso</span>
-                        <div class="detail-value">Abandono familiar</div>
+                        <div class="detail-value">todo</div>
                     </div>
                 </div>
             </div>
@@ -98,22 +98,18 @@
             </div>
             <div class="section-body">
                 <div class="detail-grid">
-                    <div class="detail-item">
-                        <span class="detail-label">Madre</span>
-                        <div class="detail-value">
-                            <strong>Ana García Martínez</strong><br>
-                            Estado: No ubicado<br>
-                            Teléfono: No disponible
+                    
+                    @foreach ($menor->progenitores as $index => $progenitor)
+                        <div class="detail-item">
+                            <span class="detail-label">todo: Madre</span>
+                            <div class="detail-value">
+                                <strong>{{$progenitor->nombre}} {{$progenitor->apellido_paterno}} {{$progenitor->apellido_materno}}</strong><br>
+                                Estado: todo: No ubicado<br>
+                                Teléfono: todo: No disponible
+                            </div>
                         </div>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Padre</span>
-                        <div class="detail-value">
-                            <strong>Juan López Pérez</strong><br>
-                            Estado: Ubicado<br>
-                            Teléfono: 55 1234 5678<br>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -127,24 +123,24 @@
                 <div class="detail-grid">
                     <div class="detail-item">
                         <span class="detail-label">Autoridad Judicial</span>
-                        <div class="detail-value">Juzgado de Menores Núm. 3</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial->autoridad_judicial}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Estado Procesal</span>
-                        <div class="detail-value">En investigación</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial->estado_procesal}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Fecha de Inicio</span>
-                        <div class="detail-value">20/03/2023</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial->fecha_inicio_proceso}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Carpeta de Investigación</span>
-                        <div class="detail-value">FDS/0456/2023</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial->carpeta_investigacion}}</div>
                     </div>
                 </div>
                 <div class="detail-item" style="margin-top: 15px;">
                     <span class="detail-label">Observaciones</span>
-                    <div class="detail-value">Se está buscando a familiares extensos para posible reintegración familiar.</div>
+                    <div class="detail-value">{{$menor->expedienteJudicial->observaciones_judiciales}}</div>
                 </div>
             </div>
         </div>
@@ -183,14 +179,19 @@
                 <div style="margin-top: 30px;">
                     <h4 style="color: var(--azul-oscuro); margin-bottom: 15px;">Medidas de Protección</h4>
                     <div class="detail-grid">
-                        <div class="detail-item">
-                            <span class="detail-label">Custodia Temporal</span>
-                            <div class="detail-value">
-                                <strong>Estado:</strong> Vigente<br>
-                                <strong>Inicio:</strong> 15/03/2023<br>
-                                {{-- <strong>Observaciones:</strong> Hasta que se resuelva situación familiar --}}
+                        
+                        @foreach ($menor->medidasProteccion as $index => $medida)
+                            
+                            <div class="detail-item">
+                                <span class="detail-label">{{$medida->tipo_medida}}</span>
+                                <div class="detail-value">
+                                    <strong>Estado:</strong> {{$medida->detalles_medida}}<br>
+                                    <strong>Inicio:</strong> {{$medida->fecha}}<br>
+                                    {{-- <strong>Observaciones:</strong> Hasta que se resuelva situación familiar --}}
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -229,18 +230,24 @@
                 <h3 class="section-title">Historial de Fugas</h3>
             </div>
             <div class="section-body">
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">05/04/2023</div>
-                        <div class="timeline-content">
-                            <strong>Estatus:</strong> 
-                            <span class="status-badge badge-active">Localizado</span>
-                            <br>
-                            <strong>Descripción:</strong> Salida no autorizada durante visita al parque<br>
-                            <strong>Fecha de retorno:</strong> 05/04/2023<br>
+                
+                @forelse ($menor->fugas as $index => $fuga)    
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">{{$fuga->fecha}}</div>
+                            <div class="timeline-content">
+                                <strong>Estatus:</strong> 
+                                <span class="status-badge badge-active">Localizado: todo</span>
+                                <br>
+                                <strong>Descripción:</strong> {{$fuga->detalles}}<br>
+                                <strong>Fecha de retorno:</strong> {{$fuga->fecha}}<br>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    <p style="">No fugas registradas</p>
+                @endforelse
+                
             </div>
         </div>
 
@@ -280,7 +287,7 @@
         <!-- Botones de acción -->
         <div class="actions-toolbar">
             <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('inicio')}}'">Regresar</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('formulario.index')}}'">Editar Registro</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('formulario.edit', $menor)}}'">Editar Registro</button>
             <button class="btn btn-danger">Dar de Baja</button>
         </div>
     </main>
