@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menores', function (Blueprint $table) {
             $table->id('id_menor');
-            $table->foreignId('expediente_id')->constrained('expediente', 'id_expediente');
+            $table->foreignId('expediente_id')->constrained('expediente', 'id_expediente')->onDelete('cascade');
             $table->string('nombre');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
@@ -22,13 +22,16 @@ return new class extends Migration
             $table->integer('edad');
             $table->string('curp');
             $table->string('sexo');
+            $table->string('nacionalidad');
             $table->boolean('discapacidad');
             $table->text('tipo_discapacidad')->nullable();
-            $table->foreignId('equipo_id')->constrained('equipo', 'id_equipo');
+            // $table->foreignId('equipo_id')->constrained('equipo', 'id_equipo')->onDelete('cascade');
             $table->date('fecha_puesta');
             $table->text('ubicacion_actual');
-            $table->foreignId('albergue_id')->constrained('albergue', 'id_albergue');
-            $table->foreignId('estatus_id')->constrained('estatus', 'id_status');
+            $table->string('autoridad_ingresa');
+            $table->text('motivo_ingreso')->nullable();
+            $table->foreignId('albergue_id')->constrained('albergue', 'id_albergue')->onDelete('cascade');
+            // $table->foreignId('estatus_id')->constrained('estatus', 'id_status')->onDelete('cascade');
             $table->text('observaciones')->nullable();
             $table->timestamps();
         });
@@ -39,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('menor');
+        Schema::dropIfExists('menores');
     }
 };

@@ -54,14 +54,14 @@
                         <td>{{ $menor->fecha_nacimiento }}</td>
                         <td>{{ $menor->fecha_puesta }}</td>
                         <td>{{ $menor->ubicacion_actual }}</td>
-                        <td>{{ $menor->equipo_id }}</td>
+                        <td>{{ $menor->autoridad_ingresa }}</td>
                         <td><span class="badge badge-active">Activo</span></td>
                         <td>
                             <div class="actions">
                                 <button type="button" onclick="window.location.href='{{route('formulario.edit', $menor)}}'" title="Editar">✏️</button>
                                 <button type="button" onclick="window.location.href='{{route('formulario.show', $menor)}}'" title="Ver detalles">👁️</button>
                                 {{-- <button title="Ver detalles">👁️</button> --}}
-                                <button title="Documentos">📄</button>
+                                {{-- <button title="Documentos">📄</button> --}}
                             </div>
                         </td>
                     </tr>

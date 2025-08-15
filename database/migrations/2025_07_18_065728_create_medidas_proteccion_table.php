@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('medidas_proteccion', function (Blueprint $table) {
             $table->id('id_medida');
-            $table->foreignId('menor_id')->constrained('menores', 'id_menor');
+            $table->foreignId('menor_id')->constrained('menores', 'id_menor')->onDelete('cascade');
             $table->text('detalles_medida');
             $table->string('tipo_medida');
-            $table->text('plan_restitucion');
+            $table->text('plan_restitucion')->nullable();
             $table->date('fecha');
             $table->timestamps();
         });

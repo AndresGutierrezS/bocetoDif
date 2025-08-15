@@ -1,7 +1,7 @@
 <header id="main-navbar">
     <div class="container header-content">
         <div class="logo">
-            <img src="{{ asset('images/logoDIF.png') }}" alt="LOGO DIF">
+            <a href="{{route('inicio')}}"><img src="{{ asset('images/logoDIF.png') }}" alt="LOGO DIF"></a>
                 <div class="logo-text">
                     <h1>Sistema Segumiento de Gestión de Menores</h1>
                     <p>DIF Guadalajara</p>

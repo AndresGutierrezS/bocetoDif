@@ -14,7 +14,11 @@
 
     <main class="container">
         <div class="profile-header">
-            <img src="{{ asset('images/menorFemina.png') }}" alt="Foto" class="profile-photo">
+            @if ($menor->sexo == 'Femenino')
+                <img src="{{ asset('images/menorFemina.png') }}" alt="Foto" class="profile-photo">
+            @else
+                <img src="{{ asset('images/user.png') }}" alt="Foto" class="profile-photo">
+            @endif
             <div class="profile-info">
                 <h2>{{$menor->nombre}} {{$menor->apellido_paterno}} {{$menor->apellido_materno}}</h2>
                 <div class="profile-meta">
@@ -54,7 +58,7 @@
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Nacionalidad</span>
-                        <div class="detail-value">todo</div>
+                        <div class="detail-value">{{$menor->nacionalidad}}</div>
                     </div>
                     {{-- <div class="detail-item">
                         <span class="detail-label">Estado de Origen</span>
@@ -81,11 +85,11 @@
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Autoridad que Ingresó</span>
-                        <div class="detail-value">todo</div>
+                        <div class="detail-value">{{$menor->autoridad_ingresa}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Motivo de Ingreso</span>
-                        <div class="detail-value">todo</div>
+                        <div class="detail-value">{{$menor->motivo_ingreso}}</div>
                     </div>
                 </div>
             </div>
@@ -101,11 +105,11 @@
                     
                     @foreach ($menor->progenitores as $index => $progenitor)
                         <div class="detail-item">
-                            <span class="detail-label">todo: Madre</span>
+                            <span class="detail-label">{{$progenitor->relacion}}</span>
                             <div class="detail-value">
                                 <strong>{{$progenitor->nombre}} {{$progenitor->apellido_paterno}} {{$progenitor->apellido_materno}}</strong><br>
-                                Estado: todo: No ubicado<br>
-                                Teléfono: todo: No disponible
+                                Estado: {{$progenitor->estado_actual}}<br>
+                                Teléfono: {{$progenitor->telefono}}
                             </div>
                         </div>
                     @endforeach
@@ -123,24 +127,24 @@
                 <div class="detail-grid">
                     <div class="detail-item">
                         <span class="detail-label">Autoridad Judicial</span>
-                        <div class="detail-value">{{$menor->expedienteJudicial->autoridad_judicial}}</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial?->autoridad_judicial}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Estado Procesal</span>
-                        <div class="detail-value">{{$menor->expedienteJudicial->estado_procesal}}</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial?->estado_procesal}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Fecha de Inicio</span>
-                        <div class="detail-value">{{$menor->expedienteJudicial->fecha_inicio_proceso}}</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial?->fecha_inicio_proceso}}</div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Carpeta de Investigación</span>
-                        <div class="detail-value">{{$menor->expedienteJudicial->carpeta_investigacion}}</div>
+                        <div class="detail-value">{{$menor->expedienteJudicial?->carpeta_investigacion}}</div>
                     </div>
                 </div>
                 <div class="detail-item" style="margin-top: 15px;">
                     <span class="detail-label">Observaciones</span>
-                    <div class="detail-value">{{$menor->expedienteJudicial->observaciones_judiciales}}</div>
+                    <div class="detail-value">{{$menor->expedienteJudicial?->observaciones_judiciales}}</div>
                 </div>
             </div>
         </div>
@@ -155,22 +159,38 @@
                     <div class="detail-item">
                         <span class="detail-label">Seguimiento Jurídico</span>
                         <div class="detail-value">
-                            <span class="status-badge badge-active">Activo</span><br>
-                            El menor tiene seguimiento jurídico<br>
+                            
+                            @if ($menor->seguimientos->seguimiento_juridico == '1')
+                                <span class="status-badge badge-active">Activo</span><br>
+                                El menor tiene seguimiento jurídico<br>
+                            @else
+                                <span class="status-badge">Inactivo</span><br>
+                                El menor no tiene seguimiento jurídico<br>
+                            @endif
                         </div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Seguimiento Psicológico</span>
                         <div class="detail-value">
-                            <span class="status-badge badge-active">Activo</span><br>
-                            El menor tiene seguimiento psicológico<br>
+                            @if ($menor->seguimientos->seguimiento_psicologico == '1')
+                                <span class="status-badge badge-active">Activo</span><br>
+                                El menor tiene seguimiento psicológico<br>
+                            @else
+                                <span class="status-badge">Inactivo</span><br>
+                                El menor no tiene seguimiento psicológico<br>
+                            @endif 
                         </div>
                     </div>
                     <div class="detail-item">
                         <span class="detail-label">Seguimiento Trabajo Social</span>
                         <div class="detail-value">
-                            <span class="status-badge badge-active">Activo</span><br>
-                            El menor tiene seguimiento del trabajo social<br>
+                            @if ($menor->seguimientos->seguimiento_social == '1')
+                                <span class="status-badge badge-active">Activo</span><br>
+                                El menor tiene seguimiento del trabajo social<br>
+                            @else
+                                <span class="status-badge">Inactivo</span><br>
+                                El menor no tiene seguimiento social<br>
+                            @endif 
                         </div>
                     </div>
                 </div>
@@ -237,7 +257,7 @@
                             <div class="timeline-date">{{$fuga->fecha}}</div>
                             <div class="timeline-content">
                                 <strong>Estatus:</strong> 
-                                <span class="status-badge badge-active">Localizado: todo</span>
+                                <span class="status-badge badge-active">{{$fuga->estatus}}</span>
                                 <br>
                                 <strong>Descripción:</strong> {{$fuga->detalles}}<br>
                                 <strong>Fecha de retorno:</strong> {{$fuga->fecha}}<br>

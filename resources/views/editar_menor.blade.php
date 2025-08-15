@@ -13,7 +13,7 @@
     <main class="container">
         <div class="form-container">
             <div class="form-header">
-                <h2>Nuevo Registro de Menor</h2>
+                <h2>Editar Registro de Menor</h2>
                     <div class="form-actions">
                     <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-secondary">Cancelar</button>
                     {{-- <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-primary">Guardar Registro</button> --}}
@@ -23,8 +23,9 @@
             <div class="alert-info">
                 Los campos marcados con <span class="required">*</span> son obligatorios.
             </div>
-            <form method="POST" action="{{ route('formulario.index') }}">
+            <form method="POST" action="{{ route('formulario.update', $menor) }}">
                 @csrf
+                @method('PUT')
                 <!-- Sección 1: Datos Personales del Menor -->
                 <div class="form-section">
                     <div class="section-header">
@@ -151,11 +152,11 @@
                         <div class="form-group">
                             <label for="autoridad" class="required">Autoridad que Ingresa</label>
                             <select id="autoridad" name="autoridad" class="form-control" >
-                                <option value="">Seleccionar...</option>
-                                <option value="1">DIF Municipal</option>
-                                <option value="2">DIF Estatal</option>
-                                <option value="3">Fiscalía</option>
-                                <option value="4">Policía</option>
+                                <option value="" disabled {{ old('autoridad', $menor->autoridad_ingresa) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                <option value="DIF Municipal" {{ old('autoridad', $menor->autoridad_ingresa) == 'DIF Municipal' ? 'selected' : '' }}>DIF Municipal</option>
+                                <option value="DIF Estatal" {{ old('autoridad', $menor->autoridad_ingresa) == 'DIF Estatal' ? 'selected' : '' }}>DIF Estatal</option>
+                                <option value="Fiscalía" {{ old('autoridad', $menor->autoridad_ingresa) == 'Fiscalía' ? 'selected' : '' }}>Fiscalía</option>
+                                <option value="Policía" {{ old('autoridad', $menor->autoridad_ingresa) == 'Policía' ? 'selected' : '' }}>Policía</option>
                             </select>
                             @error('autoridad')
                                 <p class="error">
@@ -166,7 +167,7 @@
                         
                         <div class="form-group">
                             <label for="motivoIngreso">Motivo de Ingreso</label>
-                            <textarea id="motivoIngreso" name="motivo_ingreso" class="form-control form-textarea">{{ old('motivo_ingreso') }}</textarea>
+                            <textarea id="motivoIngreso" name="motivo_ingreso" class="form-control form-textarea">{{ old('motivo_ingreso', $menor->motivo_ingreso) }}</textarea>
                             @error('motivo_ingreso')
                                 <p class="error">
                                     {{ $message }}
@@ -224,10 +225,10 @@
                                     <label>Estado Actual</label>
                                     <select name="progenitor_estado[]" class="form-control">
                                         <option value="">Seleccionar...</option>
-                                        <option value="Ubicado" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'Ubicado' ? 'selected' : '' }}>Ubicado</option>
-                                        <option value="No ubicado" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'No ubicado' ? 'selected' : '' }}>No ubicado</option>
-                                        <option value="Fallecido" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'Fallecido' ? 'selected' : '' }}>Fallecido</option>
-                                        <option value="Desconocido" {{ old('progenitor_estado.' . $index, $progenitor->estado) == 'Desconocido' ? 'selected' : '' }}>Desconocido</option>
+                                        <option value="Ubicado" {{ old('progenitor_estado.' . $index, $progenitor->estado_actual) == 'Ubicado' ? 'selected' : '' }}>Ubicado</option>
+                                        <option value="No ubicado" {{ old('progenitor_estado.' . $index, $progenitor->estado_actual) == 'No ubicado' ? 'selected' : '' }}>No ubicado</option>
+                                        <option value="Fallecido" {{ old('progenitor_estado.' . $index, $progenitor->estado_actual) == 'Fallecido' ? 'selected' : '' }}>Fallecido</option>
+                                        <option value="Desconocido" {{ old('progenitor_estado.' . $index, $progenitor->estado_actual) == 'Desconocido' ? 'selected' : '' }}>Desconocido</option>
                                     </select>
                                 </div>
 
@@ -409,11 +410,11 @@
                                 <label>Seguimiento Jurídico</label>
                                 <div class="radio-group">
                                     <div class="radio-option">
-                                        <input type="radio" id="juridicoSi" name="juridico" value="Si">
+                                        <input type="radio" id="juridicoSi" name="juridico" value="1" {{ old('juridico', $menor->seguimientos->seguimiento_juridico) == '1' ? 'checked' : '' }}>
                                         <label for="juridicoSi">Sí</label>
                                     </div>
                                     <div class="radio-option">
-                                        <input type="radio" id="juridicoNo" name="juridico" value="No" checked>
+                                        <input type="radio" id="juridicoNo" name="juridico" value="0" {{ old('juridico', $menor->seguimientos->seguimiento_juridico) == '0' ? 'checked' : '' }}>
                                         <label for="juridicoNo">No</label>
                                     </div>
                                 </div>
@@ -423,11 +424,11 @@
                                 <label>Seguimiento Psicológico</label>
                                 <div class="radio-group">
                                     <div class="radio-option">
-                                        <input type="radio" id="psicologicoSi" name="psicologico" value="Si">
+                                        <input type="radio" id="psicologicoSi" name="psicologico" value="1" {{ old('juridico', $menor->seguimientos->seguimiento_psicologico) == '1' ? 'checked' : '' }}>
                                         <label for="psicologicoSi">Sí</label>
                                     </div>
                                     <div class="radio-option">
-                                        <input type="radio" id="psicologicoNo" name="psicologico" value="No" checked>
+                                        <input type="radio" id="psicologicoNo" name="psicologico" value="0" {{ old('juridico', $menor->seguimientos->seguimiento_psicologico) == '0' ? 'checked' : '' }}>
                                         <label for="psicologicoNo">No</label>
                                     </div>
                                 </div>
@@ -437,11 +438,11 @@
                                 <label>Seguimiento Trabajo Social</label>
                                 <div class="radio-group">
                                     <div class="radio-option">
-                                        <input type="radio" id="socialSi" name="social" value="Si">
+                                        <input type="radio" id="socialSi" name="social" value="1" {{ old('juridico', $menor->seguimientos->seguimiento_trabajo_social) == '1' ? 'checked' : '' }}>
                                         <label for="socialSi">Sí</label>
                                     </div>
                                     <div class="radio-option">
-                                        <input type="radio" id="socialNo" name="social" value="No" checked>
+                                        <input type="radio" id="socialNo" name="social" value="0" {{ old('juridico', $menor->seguimientos->seguimiento_trabajo_social) == '0' ? 'checked' : '' }}>
                                         <label for="socialNo">No</label>
                                     </div>
                                 </div>
@@ -517,10 +518,10 @@
                         <div class="form-group">
                             <label for="ubicacionTipo">Tipo de Ubicación</label>
                             <select id="ubicacionTipo" name="ubicacion_tipo" class="form-control">
-                                <option value="">Seleccionar...</option>
-                                <option value="Albergue">Albergue</option>
-                                <option value="Familiar">Familiar</option>
-                                <option value="Otro">Otro</option>
+                                <option value="" disabled {{ old('ubicacion_tipo', $menor->ubicacionActual->tipo_ubicacion) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                <option value="Albergue" {{ old('ubicacion_tipo', $menor->ubicacionActual->tipo_ubicacion) == 'Albergue' ? 'selected' : '' }}>Albergue</option>
+                                <option value="Familiar" {{ old('ubicacion_tipo', $menor->ubicacionActual->tipo_ubicacion) == 'Familiar' ? 'selected' : '' }}>Familiar</option>
+                                <option value="Otro" {{ old('ubicacion_tipo', $menor->ubicacionActual->tipo_ubicacion) == 'Otro' ? 'selected' : '' }}>Otro</option>
                             </select>
                             @error('ubicacion_tipo')
                                 <p class="error">
@@ -531,7 +532,7 @@
                         
                         <div class="form-group">
                             <label for="ubicacionNombre">Nombre (Albergue/Familiar)</label>
-                            <input type="text" id="ubicacionNombre" name="ubicacion_nombre" class="form-control" value="{{ old('ubicacion_nombre') }}">
+                            <input type="text" id="ubicacionNombre" name="ubicacion_nombre" class="form-control" value="{{ old('ubicacion_nombre', $menor->ubicacionActual->nombre) }}">
                             @error('ubicacion_nombre')
                                 <p class="error">
                                     {{ $message }}
@@ -541,7 +542,7 @@
                         
                         <div class="form-group">
                             <label for="ubicacionParentesco">Parentesco (si aplica)</label>
-                            <input type="text" id="ubicacionParentesco" name="ubicacion_parentesco" class="form-control" value="{{ old('ubicacion_parentesco') }}">
+                            <input type="text" id="ubicacionParentesco" name="ubicacion_parentesco" class="form-control" value="{{ old('ubicacion_parentesco', $menor->ubicacionActual->parentesco) }}">
                             @error('ubicacion_parentesco')
                                 <p class="error">
                                     {{ $message }}
@@ -552,10 +553,10 @@
                         <div class="form-group">
                             <label for="ubicacionEstatus">Estatus</label>
                             <select id="ubicacionEstatus" name="ubicacion_estatus" class="form-control">
-                                <option value="">Seleccionar...</option>
-                                <option value="Temporal">Temporal</option>
-                                <option value="Permanente">Permanente</option>
-                                <option value="En transición">En transición</option>
+                                <option value="" disabled {{ old('ubicacion_estatus', $menor->ubicacionActual->estatus) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                <option value="Temporal" {{ old('ubicacion_estatus', $menor->ubicacionActual->estatus) == 'Temporal' ? 'selected' : '' }}>Temporal</option>
+                                <option value="Permanente" {{ old('ubicacion_estatus', $menor->ubicacionActual->estatus) == 'Permanente' ? 'selected' : '' }}>Permanente</option>
+                                <option value="En transición" {{ old('ubicacion_estatus', $menor->ubicacionActual->estatus) == 'En transición' ? 'selected' : '' }}>En transición</option>
                             </select>
                             @error('ubicacion_estatus')
                                 <p class="error">
@@ -567,7 +568,7 @@
                     
                     <div class="form-group">
                         <label for="ubicacionDireccion">Dirección</label>
-                        <textarea id="ubicacionDireccion" name="ubicacion_direccion" class="form-control form-textarea">{{ old('ubicacion_direccion' )}}</textarea>
+                        <textarea id="ubicacionDireccion" name="ubicacion_direccion" class="form-control form-textarea">{{ old('ubicacion_direccion', $menor->ubicacionActual->direccion )}}</textarea>
                         @error('ubicacion_direccion')
                             <p class="error">
                                 {{ $message }}
@@ -610,9 +611,9 @@
                                 <div class="form-group" style="flex: 1;">
                                     <label for="fugaEstatus1">Estatus</label>
                                     <select id="fugaEstatus1" name="fuga_estatus[]" class="form-control">
-                                        <option value="">Seleccionar...</option>
-                                        <option value="Localizado">Localizado</option>
-                                        <option value="No localizado">No localizado</option>
+                                        <option value="" disabled {{ old('fuga_estatus[]', $fuga->estatus) == '' ? 'selected' : '' }}>Seleccionar...</option>
+                                        <option value="Localizado" {{ old('fuga_estatus[]', $fuga->estatus) == 'Localizado' ? 'selected' : '' }}>Localizado</option>
+                                        <option value="No localizado" {{ old('fuga_estatus[]', $fuga->estatus) == 'No localizado' ? 'selected' : '' }}>No localizado</option>
                                     </select>
                                     @error('fuga_estatus[]')
                                         <p class="error">
@@ -633,8 +634,8 @@
                 
                 <!-- Botones finales -->
                 <div class="form-actions" style="margin-top: 30px; justify-content: flex-end;">
-                    <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-secondary" type="submit">Cancelar</button>
-                    <button class="btn btn-primary">Guardar Registro</button>
+                    <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-secondary">Cancelar</button>
+                    <button class="btn btn-primary" type="submit">Actualizar Registro</button>
                 </div>
             </form>
         </div>

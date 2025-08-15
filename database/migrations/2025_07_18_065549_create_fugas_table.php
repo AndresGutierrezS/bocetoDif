@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('fugas', function (Blueprint $table) {
             $table->id('id_fuga');
-            $table->foreignId('menor_id')->constrained('menores', 'id_menor');
+            $table->foreignId('menor_id')->constrained('menores', 'id_menor')->onDelete('cascade');
             $table->date('fecha');
             $table->text('detalles')->nullable();
+            $table->string('estatus')->nullable();
             $table->timestamps();
         });
     }

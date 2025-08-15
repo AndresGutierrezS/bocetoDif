@@ -30,6 +30,7 @@ Route::get('/', [InicioController::class, 'index'])->name('inicio');
 Route::get('/formulario', [FormularioController::class, 'index'])->name('formulario.index');
 Route::post('/formulario', [FormularioController::class, 'store'])->name('formulario.post');
 Route::get('/formulario/{menor}/edit', [FormularioController::class, 'edit'])->name('formulario.edit');
+Route::put('/formulario/{menor}', [FormularioController::class, 'update'])->name('formulario.update');
 Route::get('/formulario/{menor}/visualizar', [FormularioController::class, 'show'])->name('formulario.show');
 
 // Route::get('/formulario', function () {

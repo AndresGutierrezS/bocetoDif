@@ -15,7 +15,10 @@ class Progenitor extends Model
         'menor_id',
         'nombre',
         'apellido_paterno',
-        'apellido_materno'
+        'apellido_materno',
+        'relacion',
+        'estado_actual',
+        'telefono'
     ];
 
     public function menor() 

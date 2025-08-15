@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reintegraciones', function (Blueprint $table) {
             $table->id('id_reintegracion');
-            $table->foreignId('menor_id')->constrained('menores', 'id_menor');
+            $table->foreignId('menor_id')->constrained('menores', 'id_menor')->onDelete('cascade');
             $table->string('tipo_reintegracion');
             $table->date('fecha');
             $table->text('detalles')->nullable();

@@ -11,12 +11,14 @@ class ExpedienteJudicial extends Model
 
     protected $table = 'expediente_judicial';
 
-    // protected $fillable = [
-    //     'id_menor',
-    //     'estado_procesal',
-    //     'archivo',
-    //     'in_menor'
-    // ];
+    protected $fillable = [
+        'menor_id',
+        'autoridad_judicial',
+        'estado_procesal',
+        'fecha_inicio_proceso',
+        'carpeta_investigacion',
+        'observaciones_judiciales',
+    ];
 
     public function menor()
     {

@@ -14,26 +14,21 @@ class Menor extends Model
     public $incrementing = true;
     protected $keyType = 'int';
 
-    // protected $fillable = [
-    //     // 'expediente_id',
-    //     'nombre',
-    //     'apellido_paterno',
-    //     'apellido_materno',
-    //     // 'iniciales',
-    //     'fecha_nacimiento',
-    //     'edad',
-    //     'curp',
-    //     'sexo',
-    //     // 'discapacidad',
-    //     // 'tipo_discapacidad',
-    //     // 'equipo_id',
-    //     // 'fecha_puesta',
-    //     // 'ubicacion actual',
-    //     // 'albergue_id',
-    //     // 'estatus_id',
-    //     // 'observaciones',
-    //     // 'created_at'
-    // ];
+    protected $fillable = [
+        'nombre',
+        'apellido_paterno',
+        'apellido_materno',
+        'fecha_nacimiento',
+        'edad',
+        'curp',
+        'sexo',
+        'nacionalidad',
+        'fecha_puesta',
+        'ubicacion_actual',
+        'autoridad_ingresa',
+        'motivo_ingreso',
+        'iniciales',
+    ];
 
     public function progenitores()
     {
@@ -47,7 +42,7 @@ class Menor extends Model
 
     public function seguimientos()
     {
-        return $this->hasMany(Seguimiento::class, 'menor_id', 'id_menor');
+        return $this->hasOne(Seguimiento::class, 'menor_id', 'id_menor');
     }
 
     public function medidasProteccion()
@@ -60,9 +55,14 @@ class Menor extends Model
         return $this->hasMany(Fuga::class, 'menor_id');
     }
 
-    public function albergue()
-    {
-        return $this->hasOne(Albergue::class, 'albergue_id');
-    }
-
+    // public function albergue()
+    // {
+    //     return $this->hasOne(Albergue::class, 'menor_id');
+    // }
+    
+    public function ubicacionActual()
+   {
+        return $this->hasOne(UbicacionActual::class, 'menor_id');
+   } 
+    
 }
