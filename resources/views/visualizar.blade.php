@@ -307,8 +307,14 @@
         <!-- Botones de acción -->
         <div class="actions-toolbar">
             <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('inicio')}}'">Regresar</button>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('formulario.edit', $menor)}}'">Editar Registro</button>
-            <button class="btn btn-danger">Dar de Baja</button>
+            @if (Auth::user()->nombre_usuario === 'Administrador')
+                <button type="button" class="btn btn-primary" onclick="window.location.href='{{route('formulario.edit', $menor)}}'">Editar Registro</button>
+                <form action="{{ route('formulario.destroy', $menor) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este menor?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Dar de Baja</button>
+                </form>
+            @endif
         </div>
     </main>
 </body>

@@ -9,9 +9,9 @@ class Seguimiento extends Model
 {
     use HasFactory;
     protected $table = 'atenciones';
+    protected $primaryKey = 'menor_id';
 
     protected $fillable = [
-        'tipo_atencion_id',
         'menor_id',
         'seguimiento_juridico',
         'seguimiento_psicologico',

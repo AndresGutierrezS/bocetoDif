@@ -634,7 +634,7 @@
                 
                 <!-- Botones finales -->
                 <div class="form-actions" style="margin-top: 30px; justify-content: flex-end;">
-                    <button onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-secondary">Cancelar</button>
+                    <a onclick="window.location.href='{{ route('inicio') }}'" class="btn btn-secondary">Cancelar</a>
                     <button class="btn btn-primary" type="submit">Actualizar Registro</button>
                 </div>
             </form>

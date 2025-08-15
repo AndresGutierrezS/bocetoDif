@@ -62,7 +62,7 @@
                             <label for="curp" class="required">CURP</label>
                             <input type="text" id="curp" name="curp" class="form-control" value="{{ old('curp')}} ">
                             @error('curp')
-                                <p class="curp">
+                                <p class="error">
                                     {{ $message }}
                                 </p>
                             @enderror

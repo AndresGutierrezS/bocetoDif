@@ -10,6 +10,7 @@ class ExpedienteJudicial extends Model
     use HasFactory;
 
     protected $table = 'expediente_judicial';
+     protected $primaryKey = 'id_expediente_judicial';
 
     protected $fillable = [
         'menor_id',

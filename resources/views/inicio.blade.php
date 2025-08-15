@@ -18,6 +18,19 @@
             </form>
         </div>
         
+        @if (session()->has('mensaje'))
+            <div style="
+                background-color: #d4edda;
+                color: #155724;
+                padding: 10px 15px;
+                border: 1px solid #c3e6cb;
+                border-radius: 4px;
+                margin-bottom: 15px;
+            ">
+                {{session('mensaje')}}      
+            </div>    
+        @endif
+
         <div class="records-container">
             <div class="records-header">
                 <h2>Registros de Menores</h2>
@@ -58,7 +71,9 @@
                         <td><span class="badge badge-active">Activo</span></td>
                         <td>
                             <div class="actions">
-                                <button type="button" onclick="window.location.href='{{route('formulario.edit', $menor)}}'" title="Editar">✏️</button>
+                                @if (Auth::user()->nombre_usuario === 'Administrador')
+                                    <button type="button" onclick="window.location.href='{{route('formulario.edit', $menor)}}'" title="Editar">✏️</button>
+                                @endif              
                                 <button type="button" onclick="window.location.href='{{route('formulario.show', $menor)}}'" title="Ver detalles">👁️</button>
                                 {{-- <button title="Ver detalles">👁️</button> --}}
                                 {{-- <button title="Documentos">📄</button> --}}

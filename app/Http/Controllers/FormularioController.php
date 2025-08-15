@@ -30,25 +30,58 @@ class FormularioController extends Controller
 
         // try {
 
-        // $request->validate([
-        //     'expediente_id' => ['required'],
-        //     'nombre' => ['required', 'max:40', 'string'],
-        //     'apellido_paterno' => ['required', 'max:30', 'string'],
-        //     'apellido_materno' => ['max:30', 'string', 'required'],
-        //     'fecha_nacimiento' => ['required', 'date'],
-        //     'edad'  => ['required', 'numeric'],
-        //     'curp'  => ['required'],
-        //     'sexo'  => ['required'],
-        //     // 'discapacidad' => ['required'],
-        //     // 'tipo_discapacidad' => ['required'],
-        //     // 'equipo_id' => ['required'],
-        //     // 'fecha_puesta' => ['required'],
-        //     // 'ubicacion actual',
-        //     // 'albergue_id' => ['required'],
-        //     // 'estatus_id' => ['required'],
-        //     // 'observaciones',
-        //     // 'created_at'
-        // ]);
+        $request->validate([
+            // 1. Menor
+            'nombre' => 'required|string|max:255',
+            'apellido_paterno' => 'required|string|max:255',
+            'apellido_materno' => 'required|string|max:255',
+            'fecha_nacimiento' => 'required|date',
+            'edad' => 'required|integer|min:0|max:18',
+            'curp' => 'required|string|max:18',
+            'sexo' => 'required',
+            'nacionalidad' => 'nullable|string|max:255',
+            'fecha_ingreso' => 'required|date',
+            'albergue' => 'required|string|max:255',
+            'autoridad' => 'required|string|max:255',
+            'motivo_ingreso' => 'nullable|string',
+
+            // 2. Progenitores (arrays)
+            'progenitor_nombre.*' => 'nullable|string|max:255',
+            'progenitor_apellido_paterno.*' => 'nullable|string|max:255',
+            'progenitor_apellido_materno.*' => 'nullable|string|max:255',
+            'progenitor_relacion.*' => 'nullable|string|max:255',
+            'progenitor_estado.*' => 'nullable|string|max:255',
+            'progenitor_telefono.*' => 'nullable|string|max:20',
+
+            // 3. Expediente judicial
+            'autoridad_judicial' => 'nullable|string|max:255',
+            'estado_procesal' => 'nullable|string|max:255',
+            'fecha_inicio_proceso' => 'nullable|date',
+            'carpeta_investigacion' => 'nullable|string|max:255',
+            'observaciones_judiciales' => 'nullable|string',
+
+            // 4. Seguimiento
+            'juridico' => 'required',
+            'psicologico' => 'required',
+            'social' => 'required',
+
+            // 5. Medidas de protección
+            'medida_tipo.*' => 'nullable|string|max:255',
+            'medida_estado.*' => 'nullable|string|max:255',
+            'medida_fecha.*' => 'nullable|date',
+
+            // 6. Ubicación actual
+            'ubicacion_tipo' => 'nullable|string|max:255',
+            'ubicacion_nombre' => 'nullable|string|max:255',
+            'ubicacion_parentesco' => 'nullable|string|max:255',
+            'ubicacion_estatus' => 'nullable|string|max:255',
+            'ubicacion_direccion' => 'nullable|string',
+
+            // 7. Fugas
+            'fuga_fecha.*' => 'nullable|date',
+            'fuga_descripcion.*' => 'nullable|string',
+            'fuga_estatus.*' => 'nullable|string|max:255', 
+        ]);
 
         $menor = new Menor();
 
@@ -185,7 +218,7 @@ class FormularioController extends Controller
                 $menor->fugas()->create([
                     'fecha' => $fecha ?? null,
                     'detalles'=> $descripciones[$index] ?? null,
-                    'estatus' => $estatus[$index],
+                    'estatus' => $estatus[$index] ?? 'No localizado',
                 ]);
             }
         }
@@ -213,6 +246,60 @@ class FormularioController extends Controller
 
     public function update(Request $request, Menor $menor)
     {
+        $request->validate([
+            // 1. Menor
+            'nombre' => 'required|string|max:255',
+            'apellido_paterno' => 'required|string|max:255',
+            'apellido_materno' => 'required|string|max:255',
+            'fecha_nacimiento' => 'required|date',
+            'edad' => 'required|integer|min:0',
+            'curp' => 'required|string|max:18',
+            'sexo' => 'required',
+            'nacionalidad' => 'nullable|string|max:255',
+            'fecha_ingreso' => 'required|date',
+            'albergue' => 'required|string|max:255',
+            'autoridad' => 'required|string|max:255',
+            'motivo_ingreso' => 'nullable|string',
+
+            // 2. Progenitores (arrays)
+            'progenitor_nombre.*' => 'nullable|string|max:255',
+            'progenitor_apellido_paterno.*' => 'nullable|string|max:255',
+            'progenitor_apellido_materno.*' => 'nullable|string|max:255',
+            'progenitor_relacion.*' => 'nullable|string|max:255',
+            'progenitor_estado.*' => 'nullable|string|max:255',
+            'progenitor_telefono.*' => 'nullable|string|max:20',
+
+            // 3. Expediente judicial
+            'autoridad_judicial' => 'required|string|max:255',
+            'estado_procesal' => 'required|string|max:255',
+            'fecha_inicio_proceso' => 'required|date',
+            'carpeta_investigacion' => 'required|string|max:255',
+            'observaciones_judiciales' => 'nullable|string',
+
+            // 4. Seguimiento
+            'juridico' => 'required',
+            'psicologico' => 'required',
+            'social' => 'required',
+
+            // 5. Medidas de protección
+            'medida_tipo.*' => 'nullable|string|max:255',
+            'medida_estado.*' => 'nullable|string|max:255',
+            'medida_fecha.*' => 'nullable|date',
+
+            // 6. Ubicación actual
+            'ubicacion_tipo' => 'nullable|string|max:255',
+            'ubicacion_nombre' => 'nullable|string|max:255',
+            'ubicacion_parentesco' => 'nullable|string|max:255',
+            'ubicacion_estatus' => 'nullable|string|max:255',
+            'ubicacion_direccion' => 'nullable|string',
+
+            // 7. Fugas
+            'fuga_fecha.*' => 'nullable|date',
+            'fuga_descripcion.*' => 'nullable|string',
+            'fuga_estatus.*' => 'nullable|string|max:255', 
+        ]);
+
+
         // 1. Actualizar tabla `menores`
         $menor->update([
             'nombre' => $request->nombre,
@@ -235,21 +322,49 @@ class FormularioController extends Controller
         ]);
 
         // 2. Progenitores
-        if ($request->has('progenitor_nombre')) {
-            foreach ((array) $request->progenitor_nombre as $i => $nombre) {
-                $menor->progenitores()->updateOrCreate(
-                    ['id_progenitor' => $request->progenitor_id[$i] ?? null], // ID si existe
-                    [
-                        'nombre' => $nombre,
-                        'apellido_paterno' => $request->progenitor_apellido_paterno[$i] ?? null,
-                        'apellido_materno' => $request->progenitor_apellido_materno[$i] ?? null,
-                        'relacion' => $request->progenitor_relacion[$i] ?? null,
-                        'estado_actual' => $request->progenitor_estado[$i] ?? null,
-                        'telefono' => $request->progenitor_telefono[$i] ?? null,
-                    ]
-                );
-            }
+        foreach ((array)$request->progenitor_id as $i => $id) {
+            $data = [
+                'nombre' => $request->progenitor_nombre[$i],
+                'apellido_paterno' => $request->progenitor_apellido_paterno[$i] ?? null,
+                'apellido_materno' => $request->progenitor_apellido_materno[$i] ?? null,
+                'relacion' => $request->progenitor_relacion[$i] ?? null,
+                'estado_actual' => $request->progenitor_estado[$i] ?? 'No localizado',
+                'telefono' => $request->progenitor_telefono[$i] ?? null,
+            ];
+
+            $menor->progenitores()->find($id)->update($data);
         }
+        
+        // $progenitor_ids = [];
+        // if ($request->has('progenitor_nombre')) {
+        //     foreach ((array) $request->progenitor_nombre as $i => $nombre) {
+        //         $id = $request->progenitor_id[$i] ?? null;
+        //         $data = [
+        //             'nombre' => $nombre,
+        //             'apellido_paterno' => $request->progenitor_apellido_paterno[$i] ?? null,
+        //             'apellido_materno' => $request->progenitor_apellido_materno[$i] ?? null,
+        //             'relacion' => $request->progenitor_relacion[$i] ?? null,
+        //             'estado_actual' => $request->progenitor_estado[$i] ?? 'No localizado',
+        //             'telefono' => $request->progenitor_telefono[$i] ?? null,
+        //         ];
+
+        //         if ($id) {
+        //             $progenitor = $menor->progenitores()->find($id);
+        //             if ($progenitor) {
+        //                 $progenitor->update($data);
+        //             } else {
+        //                 $progenitor = $menor->progenitores()->create($data);
+        //             }
+        //         } else {
+        //             $progenitor = $menor->progenitores()->create($data);
+        //         }
+
+        //         $progenitor_ids[] = $progenitor->id_progenitor;
+        //     }
+
+        //     // Eliminar los progenitores que no están en el formulario
+        //     $menor->progenitores()->whereNotIn('id_progenitor', $progenitor_ids)->delete();
+        // }
 
         // 3. Expediente judicial
         $menor->expedienteJudicial()->updateOrCreate(
@@ -274,18 +389,42 @@ class FormularioController extends Controller
         );
 
         // 5. Medidas de protección
-        if ($request->has('medida_tipo')) {
-            foreach ((array) $request->medida_tipo as $i => $tipo) {
-                $menor->medidasProteccion()->updateOrCreate(
-                    ['id_medida' => $request->medida_id[$i] ?? null],
-                    [
-                        'detalles_medida' => $request->medida_estado[$i] ?? null,
-                        'tipo_medida' => $tipo,
-                        'fecha' => $request->medida_fecha[$i] ?? null,
-                    ]
-                );
-            }
+        foreach ((array)$request->medida_id as $i => $id) {
+            $data = [
+                'detalles_medida' => $request->medida_estado[$i] ?? null,
+                'tipo_medida' => $request->medida_tipo[$i] ?? null,
+                'fecha' => $request->medida_fecha[$i] ?? null,
+            ];
+
+            $menor->medidasProteccion()->find($id)->update($data);
         }
+
+        // $medida_ids = [];
+        //     if ($request->has('medida_tipo')) {
+        //         foreach ((array) $request->medida_tipo as $i => $tipo) {
+        //             $id = $request->medida_id[$i] ?? null;
+        //             $data = [
+        //                 'detalles_medida' => $request->medida_estado[$i] ?? null,
+        //                 'tipo_medida' => $tipo,
+        //                 'fecha' => $request->medida_fecha[$i] ?? null,
+        //             ];
+
+        //             if ($id) {
+        //                 $medida = $menor->medidasProteccion()->find($id);
+        //                 if ($medida) {
+        //                     $medida->update($data);
+        //                 } else {
+        //                     $medida = $menor->medidasProteccion()->create($data);
+        //                 }
+        //             } else {
+        //                 $medida = $menor->medidasProteccion()->create($data);
+        //             }
+
+        //             $medida_ids[] = $medida->id_medida;
+        //         }
+
+        //         $menor->medidasProteccion()->whereNotIn('id_medida', $medida_ids)->delete();
+        //     }
 
         // 6. Ubicación actual
         $menor->ubicacionActual()->updateOrCreate(
@@ -300,18 +439,41 @@ class FormularioController extends Controller
         );
 
         // 7. Fugas
-        if ($request->has('fuga_fecha')) {
-            foreach ((array) $request->fuga_fecha as $i => $fecha) {
-                $menor->fugas()->updateOrCreate(
-                    ['id_fuga' => $request->fuga_id[$i] ?? null],
-                    [
-                        'fecha' => $fecha ?? null,
-                        'detalles' => $request->fuga_descripcion[$i] ?? null,
-                        'estatus' => $request->fuga_estatus[$i] ?? null,
-                    ]
-                );
-            }
+        foreach ((array)$request->fuga_id as $i => $id) {
+            $data = [
+                'fecha' => $request->fuga_fecha[$i] ?? null,
+                'detalles' => $request->fuga_descripcion[$i] ?? null,
+                'estatus' => $request->fuga_estatus[$i] ?? 'Localizado',
+            ];
+
+            $menor->fugas()->find($id)->update($data);
         }
+        // $fuga_ids = [];
+        //     if ($request->has('fuga_fecha')) {
+        //         foreach ((array) $request->fuga_fecha as $i => $fecha) {
+        //             $id = $request->fuga_id[$i] ?? null;
+        //             $data = [
+        //                 'fecha' => $fecha ?? null,
+        //                 'detalles' => $request->fuga_descripcion[$i] ?? null,
+        //                 'estatus' => $request->fuga_estatus[$i] ?? 'Localizado',
+        //             ];
+
+        //             if ($id) {
+        //                 $fuga = $menor->fugas()->find($id);
+        //                 if ($fuga) {
+        //                     $fuga->update($data);
+        //                 } else {
+        //                     $fuga = $menor->fugas()->create($data);
+        //                 }
+        //             } else {
+        //                 $fuga = $menor->fugas()->create($data);
+        //             }
+
+        //             $fuga_ids[] = $fuga->id_fuga;
+        //         }
+
+        //         $menor->fugas()->whereNotIn('id_fuga', $fuga_ids)->delete();
+        //     }
 
         return redirect()->route('inicio')->with('mensaje', 'Menor actualizado correctamente');
     }
@@ -321,5 +483,37 @@ class FormularioController extends Controller
         return view('visualizar', [
             'menor' => $menor
         ]);
+    }
+
+    public function destroy(Menor $menor)
+    {
+        try {
+
+            // Progenitores
+            $menor->progenitores()->delete();
+
+            // Expediente judicial
+            $menor->expedienteJudicial()->delete();
+
+            // Seguimientos
+            $menor->seguimientos()->delete();
+
+            // Medidas de protección
+            $menor->medidasProteccion()->delete();
+
+            // Ubicación actual
+            $menor->ubicacionActual()->delete();
+
+            // Fugas
+            $menor->fugas()->delete();
+
+
+            $menor->delete();
+
+            return redirect()->route('inicio')->with('mensaje', 'Menor eliminado correctamente');
+
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Error al eliminar el menor: ' . $e->getMessage()]);
+        }
     }
 }

@@ -31,6 +31,7 @@ Route::get('/formulario', [FormularioController::class, 'index'])->name('formula
 Route::post('/formulario', [FormularioController::class, 'store'])->name('formulario.post');
 Route::get('/formulario/{menor}/edit', [FormularioController::class, 'edit'])->name('formulario.edit');
 Route::put('/formulario/{menor}', [FormularioController::class, 'update'])->name('formulario.update');
+Route::delete('formulario/{menor}', [FormularioController::class, 'destroy'])->name('formulario.destroy');
 Route::get('/formulario/{menor}/visualizar', [FormularioController::class, 'show'])->name('formulario.show');
 
 // Route::get('/formulario', function () {
